@@ -1,0 +1,700 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Example API",
+        "description": "This is an example API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "description": " if(type) {(0=>ادمن) , (1=>عادي)}",
+                "operationId": "ca7c0cb6772de9bffbb8c896980cebc8",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            },
+                                            "isAdmin": {
+                                                "type": "boolean"
+                                            },
+                                            "sumPermessions": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "name",
+                                    "email": "email",
+                                    "password": "password",
+                                    "isAdmin": "isAdmin",
+                                    "sumPermessions": "sumPermessions"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "email"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "password"
+                                        },
+                                        "isAdmin": {
+                                            "type": "boolean",
+                                            "example": "isAdmin"
+                                        },
+                                        "sumPermessions": {
+                                            "type": "integer",
+                                            "example": "sumPermessions"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "login",
+                "operationId": "c373bc4cffa4a56fc64e3979b8ee7b96",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "name",
+                                    "password": "password"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "password"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "me",
+                "operationId": "57d51f3fa328d534a6ee8562484d0687",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/refresh": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "refresh",
+                "operationId": "9f3a057bc8511204636ffc3118b1be04",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "logout",
+                "operationId": "5ff2dc8b48bff52908d3821a0ecc9b3e",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/tenantProfile": {
+            "get": {
+                "tags": [
+                    "TenantProfile"
+                ],
+                "summary": "Get all tenant",
+                "operationId": "82e3081fc89ab2e88a5134a62b28e7b3",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/tenantProfile/store": {
+            "post": {
+                "tags": [
+                    "TenantProfile"
+                ],
+                "summary": "store",
+                "operationId": "2ab2b22b14fe29b11a0f8ba64ff7d5e5",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "nameTenant": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "nameTenant": "nameTenant"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "nameTenant": {
+                                            "type": "string",
+                                            "example": "nameTenant"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/registerTenant": {
+            "post": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "Register",
+                "description": " if(type) {(0=>ادمن) , (1=>عادي)}",
+                "operationId": "a89010fdaea8762e3360329db3f38ab0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "userNameTenant": {
+                                                "type": "string"
+                                            },
+                                            "userPassTenant": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "isAdmin": {
+                                                "type": "boolean"
+                                            },
+                                            "sumPermessions": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "userNameTenant": "userNameTenant",
+                                    "userPassTenant": "userPassTenant",
+                                    "phone": "phone",
+                                    "isAdmin": "isAdmin",
+                                    "sumPermessions": "sumPermessions"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "userNameTenant": {
+                                            "type": "string",
+                                            "example": "userNameTenant"
+                                        },
+                                        "userPassTenant": {
+                                            "type": "string",
+                                            "example": "userPassTenant"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "isAdmin": {
+                                            "type": "boolean",
+                                            "example": "isAdmin"
+                                        },
+                                        "sumPermessions": {
+                                            "type": "integer",
+                                            "example": "sumPermessions"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/loginTenant": {
+            "post": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "login",
+                "operationId": "6e5e6ce9f26eec6e02bdc15b25f2be39",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "userPassTenant": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "phone": "phone",
+                                    "userPassTenant": "userPassTenant"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "userPassTenant": {
+                                            "type": "string",
+                                            "example": "userPassTenant"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/meTenant": {
+            "get": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "me",
+                "operationId": "ad5770e7900e875f4610f847e8d6e3b1",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/refreshTenant": {
+            "get": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "refresh",
+                "operationId": "3959a16db191f45156f860957d839531",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/logoutTenant": {
+            "post": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "logout",
+                "operationId": "e30e1c254d2a34a847e4860ae049de69",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
