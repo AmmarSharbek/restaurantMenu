@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address_en');
             $table->string('phone');
             $table->string('mobile');
+            $table->string("QR");
             $table->timestamps();
         });
     }

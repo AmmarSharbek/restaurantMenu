@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\TenantProfileController;
@@ -53,6 +55,19 @@ Route::post('/menu/store', [MenuController::class, "store"]);
 Route::get('/menu/show/{id}', [MenuController::class, "show"]);
 Route::post('/menu/update/{id}', [MenuController::class, "update"]);
 Route::delete('/menu/delete/{id}', [MenuController::class, "delete"]);
+
+
+Route::get('/category', [CategoryController::class, "index"]);
+Route::post('/category/store', [CategoryController::class, "store"]);
+Route::get('/category/show/{id}', [CategoryController::class, "show"]);
+Route::post('/category/update/{id}', [CategoryController::class, "update"]);
+Route::delete('/category/delete/{id}', [CategoryController::class, "delete"]);
+
+Route::get('/product', [ProductController::class, "index"]);
+Route::post('/product/store', [ProductController::class, "store"]);
+Route::get('/product/show/{id}', [ProductController::class, "show"]);
+Route::post('/product/update/{id}', [ProductController::class, "update"]);
+Route::delete('/product/delete/{id}', [ProductController::class, "delete"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, "me"]);

@@ -349,6 +349,9 @@
                                             },
                                             "mobile": {
                                                 "type": "string"
+                                            },
+                                            "QR": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -362,7 +365,8 @@
                                     "address_ar": "address_ar",
                                     "address_en": "address_en",
                                     "phone": "phone",
-                                    "mobile": "mobile"
+                                    "mobile": "mobile",
+                                    "QR": "QR"
                                 }
                             }
                         }
@@ -402,6 +406,10 @@
                                         "mobile": {
                                             "type": "string",
                                             "example": "mobile"
+                                        },
+                                        "QR": {
+                                            "type": "string",
+                                            "example": "QR"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -507,6 +515,9 @@
                                             },
                                             "mobile": {
                                                 "type": "string"
+                                            },
+                                            "QR": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -520,7 +531,8 @@
                                     "address_ar": "address_ar",
                                     "address_en": "address_en",
                                     "phone": "phone",
-                                    "mobile": "mobile"
+                                    "mobile": "mobile",
+                                    "QR": "QR"
                                 }
                             }
                         }
@@ -560,6 +572,10 @@
                                         "mobile": {
                                             "type": "string",
                                             "example": "mobile"
+                                        },
+                                        "QR": {
+                                            "type": "string",
+                                            "example": "QR"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -621,6 +637,266 @@
                 }
             }
         },
+        "/api/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get all Category",
+                "operationId": "327644f4d836240fa297b2822ab6ca92",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/category/store": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "",
+                "operationId": "713aaeb02e2cc93dbd9bc7e2b738f604",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "menu_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "menu_id": "menu_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "menu_id": {
+                                            "type": "integr",
+                                            "example": "menu_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/show/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get  Category",
+                "operationId": "8da6a36f35d8b5f88eaff18a1cc2e98f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/category/update/{id}": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "description": "",
+                "operationId": "7e14093fbd0b93a3b1c84e7db34e74c0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "menu_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "menu_id": "menu_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "QR": "QR"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "menu_id": {
+                                            "type": "integr",
+                                            "example": "menu_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "delete  Category",
+                "operationId": "177ca7c6efc6f8228b4883c4770ada7d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
         "/api/menu": {
             "get": {
                 "tags": [
@@ -660,9 +936,6 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
-                                            },
-                                            "QR": {
-                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -672,8 +945,7 @@
                                 "example": {
                                     "branch_id": "branch_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en",
-                                    "QR": "QR"
+                                    "name_en": "name_en"
                                 }
                             }
                         }
@@ -697,10 +969,6 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
-                                        },
-                                        "QR": {
-                                            "type": "string",
-                                            "example": "QR"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -794,9 +1062,6 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
-                                            },
-                                            "QR": {
-                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -806,8 +1071,7 @@
                                 "example": {
                                     "branch_id": "branch_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en",
-                                    "QR": "QR"
+                                    "name_en": "name_en"
                                 }
                             }
                         }
@@ -831,10 +1095,6 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
-                                        },
-                                        "QR": {
-                                            "type": "string",
-                                            "example": "QR"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -876,6 +1136,677 @@
                 ],
                 "summary": "delete  Menu",
                 "operationId": "705879a63ff554b5d52d3ac8067b8a24",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/option": {
+            "get": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Get all Option",
+                "operationId": "86e041357322774423090e33b352fd49",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/option/store": {
+            "post": {
+                "tags": [
+                    "Option"
+                ],
+                "description": "",
+                "operationId": "ff16e31439547021caf3d1a0b6975d63",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "product_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "product_id": "product_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "product_id": {
+                                            "type": "integr",
+                                            "example": "product_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/option/show/{id}": {
+            "get": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Get  Option",
+                "operationId": "4947388818ba7a53613c0c6e9aec0fef",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/option/update/{id}": {
+            "post": {
+                "tags": [
+                    "Option"
+                ],
+                "description": "",
+                "operationId": "99dc26188395991e77caa8ced8d2faaf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "product_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "product_id": "product_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "QR": "QR"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "product_id": {
+                                            "type": "integr",
+                                            "example": "product_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/option/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "delete  Option",
+                "operationId": "7c940fb121cfd3ac3d5b844a84cbf10b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/product": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get all Product",
+                "operationId": "5cc57bec35d0f2045983cc8dcd00eccd",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/product/store": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "",
+                "operationId": "4d962cd96a144c22258e3409ba66d8c0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "category_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
+                                                "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "price_offer": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "common": {
+                                                "type": "boolean"
+                                            },
+                                            "new": {
+                                                "type": "boolean"
+                                            },
+                                            "hidden": {
+                                                "type": "boolean"
+                                            },
+                                            "unavailable": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "category_id": "category_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
+                                    "image": "image",
+                                    "price": "0",
+                                    "price_offer": "0",
+                                    "common": "0",
+                                    "new": "0",
+                                    "hidden": "0",
+                                    "unavailable": "0"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "category_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price"
+                                        },
+                                        "price_offer": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price_offer"
+                                        },
+                                        "common": {
+                                            "type": "boolean",
+                                            "example": "common"
+                                        },
+                                        "new": {
+                                            "type": "boolean",
+                                            "example": "new"
+                                        },
+                                        "hidden": {
+                                            "type": "boolean",
+                                            "example": "hidden"
+                                        },
+                                        "unavailable": {
+                                            "type": "boolean",
+                                            "example": "unavailable"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/show/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get  Product",
+                "operationId": "e0aa590f509ffbfa019ca1dfc8df3198",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/product/update/{id}": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "",
+                "operationId": "0924990a3e69c9b8999c264bcec33b2a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "category_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
+                                                "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "price_offer": {
+                                                "type": "number",
+                                                "format": "double"
+                                            },
+                                            "common": {
+                                                "type": "boolean"
+                                            },
+                                            "new": {
+                                                "type": "boolean"
+                                            },
+                                            "hidden": {
+                                                "type": "boolean"
+                                            },
+                                            "unavailable": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "category_id": "category_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
+                                    "image": "image",
+                                    "price": "0",
+                                    "price_offer": "0",
+                                    "common": "0",
+                                    "new": "0",
+                                    "hidden": "0",
+                                    "unavailable": "0"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": "category_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price"
+                                        },
+                                        "price_offer": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price_offer"
+                                        },
+                                        "common": {
+                                            "type": "boolean",
+                                            "example": "common"
+                                        },
+                                        "new": {
+                                            "type": "boolean",
+                                            "example": "new"
+                                        },
+                                        "hidden": {
+                                            "type": "boolean",
+                                            "example": "hidden"
+                                        },
+                                        "unavailable": {
+                                            "type": "boolean",
+                                            "example": "unavailable"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "delete  Product",
+                "operationId": "293638e1b434fbe648acd660b27d4edb",
                 "parameters": [
                     {
                         "name": "id",
@@ -1538,6 +2469,249 @@
                 ],
                 "summary": "delete  Style",
                 "operationId": "538147287391ce613cbecbb8a62c1cae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/subOption": {
+            "get": {
+                "tags": [
+                    "SubOption"
+                ],
+                "summary": "Get all SubOption",
+                "operationId": "b5ab787afb14581db816b18350dae795",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/subOption/store": {
+            "post": {
+                "tags": [
+                    "SubOption"
+                ],
+                "description": "",
+                "operationId": "d40100de79848801086ab82fa6b695a8",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "option_id": {
+                                                "type": "integer"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "option_id": "option_id",
+                                    "value": "value"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "option_id": {
+                                            "type": "integr",
+                                            "example": "option_id"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "value"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/subOption/show/{id}": {
+            "get": {
+                "tags": [
+                    "SubOption"
+                ],
+                "summary": "Get  SubOption",
+                "operationId": "cff8d067aba12e423c438470ba0ff3d2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/subOption/update/{id}": {
+            "post": {
+                "tags": [
+                    "SubOption"
+                ],
+                "description": "",
+                "operationId": "f9575caca3164a78b7d505a1e46280f8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "option_id": {
+                                                "type": "integer"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "option_id": "option_id",
+                                    "value": "value"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "option_id": {
+                                            "type": "integr",
+                                            "example": "option_id"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "value"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/subOption/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "SubOption"
+                ],
+                "summary": "delete  SubOption",
+                "operationId": "17aa3340f9eaa42191243385e0764996",
                 "parameters": [
                     {
                         "name": "id",

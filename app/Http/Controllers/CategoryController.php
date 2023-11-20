@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Menu\MenuRequest;
-use App\Models\Menu;
+use App\Http\Requests\Category\CategoryRequest;
+use App\Models\Category;
 use App\Traits\ResponseHandler;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class CategoryController extends Controller
 {
     use ResponseHandler;
     /**
@@ -15,9 +15,9 @@ class MenuController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/menu",
-     *     tags={"Menu"},
-     *     summary="Get all Menu",
+     *     path="/api/category",
+     *     tags={"Category"},
+     *     summary="Get all Category",
      *     @OA\Response(
      *         response=200,
      *         description="Everything OK"
@@ -30,14 +30,14 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
-        return response()->json($this->success($menu));
+        $category = Category::all();
+        return response()->json($this->success($category));
     }
 
     /**
      * @OA\Post(
-     *     path="/api/menu/store",
-     *     tags={"Menu"},
+     *     path="/api/category/store",
+     *     tags={"Category"},
      *     description="" ,
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -46,7 +46,7 @@ class MenuController extends Controller
      *                 @OA\Property(
      *                      type="object",
      *                      @OA\Property(
-     *                          property="branch_id",
+     *                          property="menu_id",
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
@@ -59,7 +59,7 @@ class MenuController extends Controller
      *                      ),
      *                 ),
      *                 example={
-     *                     "branch_id":"branch_id",
+     *                     "menu_id":"menu_id",
      *                     "name_ar":"name_ar",
      *                     "name_en":"name_en",
      *                }
@@ -70,7 +70,7 @@ class MenuController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
+     *              @OA\Property(property="menu_id", type="integr", example="menu_id"),
      *              @OA\Property(property="name_ar", type="string", example="name_ar"),
      *              @OA\Property(property="name_en", type="string", example="name_en"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
@@ -86,17 +86,17 @@ class MenuController extends Controller
      *      )
      * )
      */
-    public function store(MenuRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $menu = Menu::create($request->all());
-        return response()->json($this->success($menu));
+        $category = Category::create($request->all());
+        return response()->json($this->success($category));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/menu/show/{id}",
-     *     tags={"Menu"},
-     *     summary="Get  Menu",
+     *     path="/api/category/show/{id}",
+     *     tags={"Category"},
+     *     summary="Get  Category",
      *      @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -115,14 +115,14 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        $menu = Menu::where('id', $id)->first();
-        return response()->json($this->success($menu));
+        $category = Category::where('id', $id)->first();
+        return response()->json($this->success($category));
     }
 
     /**
      * @OA\Post(
-     *     path="/api/menu/update/{id}",
-     *     tags={"Menu"},
+     *     path="/api/category/update/{id}",
+     *     tags={"Category"},
      *     description="" ,
      *     @OA\Parameter(
      *         in="path",
@@ -137,7 +137,7 @@ class MenuController extends Controller
      *                 @OA\Property(
      *                      type="object",
      *                      @OA\Property(
-     *                          property="branch_id",
+     *                          property="menu_id",
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
@@ -150,9 +150,10 @@ class MenuController extends Controller
      *                      ),
      *                 ),
      *                 example={
-     *                     "branch_id":"branch_id",
+     *                     "menu_id":"menu_id",
      *                     "name_ar":"name_ar",
      *                     "name_en":"name_en",
+     *                     "QR":"QR",
      *                }
      *             )
      *         )
@@ -161,7 +162,7 @@ class MenuController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
+     *              @OA\Property(property="menu_id", type="integr", example="menu_id"),
      *              @OA\Property(property="name_ar", type="string", example="name_ar"),
      *              @OA\Property(property="name_en", type="string", example="name_en"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
@@ -177,18 +178,18 @@ class MenuController extends Controller
      *      )
      * )
      */
-    public function update(MenuRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $menu = Menu::where('id', $id)->first();
+        $category = Category::where('id', $id)->first();
         $input = $request->all();
-        $menu->update($input);
-        return response()->json($this->success($menu));
+        $category->update($input);
+        return response()->json($this->success($category));
     }
     /**
      * @OA\Delete(
-     *     path="/api/menu/delete/{id}",
-     *     tags={"Menu"},
-     *     summary="delete  Menu",
+     *     path="/api/category/delete/{id}",
+     *     tags={"Category"},
+     *     summary="delete  Category",
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -207,8 +208,8 @@ class MenuController extends Controller
      */
     public function delete($id)
     {
-        $menu = Menu::where('id', $id)->first();
-        $menu->delete();
+        $category = Category::where('id', $id)->first();
+        $category->delete();
         return response()->json($this->success());
     }
 }

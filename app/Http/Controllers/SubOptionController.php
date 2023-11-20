@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Menu\MenuRequest;
-use App\Models\Menu;
+use App\Http\Requests\Option\SubOptionRequest;
+use App\Models\SubOption;
 use App\Traits\ResponseHandler;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class SubOptionController extends Controller
 {
     use ResponseHandler;
     /**
@@ -15,9 +15,9 @@ class MenuController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/menu",
-     *     tags={"Menu"},
-     *     summary="Get all Menu",
+     *     path="/api/subOption",
+     *     tags={"SubOption"},
+     *     summary="Get all SubOption",
      *     @OA\Response(
      *         response=200,
      *         description="Everything OK"
@@ -30,14 +30,14 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
-        return response()->json($this->success($menu));
+        $subOption = SubOption::all();
+        return response()->json($this->success($subOption));
     }
 
     /**
      * @OA\Post(
-     *     path="/api/menu/store",
-     *     tags={"Menu"},
+     *     path="/api/subOption/store",
+     *     tags={"SubOption"},
      *     description="" ,
      *     @OA\RequestBody(
      *         @OA\MediaType(
@@ -46,22 +46,17 @@ class MenuController extends Controller
      *                 @OA\Property(
      *                      type="object",
      *                      @OA\Property(
-     *                          property="branch_id",
+     *                          property="option_id",
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
-     *                          property="name_ar",
-     *                          type="string",
-     *                      ),
-     *                      @OA\Property(
-     *                          property="name_en",
+     *                          property="value",
      *                          type="string",
      *                      ),
      *                 ),
      *                 example={
-     *                     "branch_id":"branch_id",
-     *                     "name_ar":"name_ar",
-     *                     "name_en":"name_en",
+     *                     "option_id":"option_id",
+     *                     "value":"value",
      *                }
      *             )
      *         )
@@ -70,9 +65,8 @@ class MenuController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
-     *              @OA\Property(property="name_ar", type="string", example="name_ar"),
-     *              @OA\Property(property="name_en", type="string", example="name_en"),
+     *              @OA\Property(property="option_id", type="integr", example="option_id"),
+     *              @OA\Property(property="value", type="string", example="value"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -86,17 +80,17 @@ class MenuController extends Controller
      *      )
      * )
      */
-    public function store(MenuRequest $request)
+    public function store(SubOptionRequest $request)
     {
-        $menu = Menu::create($request->all());
-        return response()->json($this->success($menu));
+        $subOption = SubOption::create($request->all());
+        return response()->json($this->success($subOption));
     }
 
     /**
      * @OA\Get(
-     *     path="/api/menu/show/{id}",
-     *     tags={"Menu"},
-     *     summary="Get  Menu",
+     *     path="/api/subOption/show/{id}",
+     *     tags={"SubOption"},
+     *     summary="Get  SubOption",
      *      @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -115,14 +109,14 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        $menu = Menu::where('id', $id)->first();
-        return response()->json($this->success($menu));
+        $subOption = SubOption::where('id', $id)->first();
+        return response()->json($this->success($subOption));
     }
 
     /**
      * @OA\Post(
-     *     path="/api/menu/update/{id}",
-     *     tags={"Menu"},
+     *     path="/api/subOption/update/{id}",
+     *     tags={"SubOption"},
      *     description="" ,
      *     @OA\Parameter(
      *         in="path",
@@ -136,23 +130,18 @@ class MenuController extends Controller
      *             @OA\Schema(
      *                 @OA\Property(
      *                      type="object",
-     *                      @OA\Property(
-     *                          property="branch_id",
+     *                    @OA\Property(
+     *                          property="option_id",
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
-     *                          property="name_ar",
-     *                          type="string",
-     *                      ),
-     *                      @OA\Property(
-     *                          property="name_en",
+     *                          property="value",
      *                          type="string",
      *                      ),
      *                 ),
      *                 example={
-     *                     "branch_id":"branch_id",
-     *                     "name_ar":"name_ar",
-     *                     "name_en":"name_en",
+     *                     "option_id":"option_id",
+     *                     "value":"value",
      *                }
      *             )
      *         )
@@ -161,9 +150,8 @@ class MenuController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
-     *              @OA\Property(property="name_ar", type="string", example="name_ar"),
-     *              @OA\Property(property="name_en", type="string", example="name_en"),
+     *              @OA\Property(property="option_id", type="integr", example="option_id"),
+     *              @OA\Property(property="value", type="string", example="value"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -177,18 +165,18 @@ class MenuController extends Controller
      *      )
      * )
      */
-    public function update(MenuRequest $request, $id)
+    public function update(SubOptionRequest $request, $id)
     {
-        $menu = Menu::where('id', $id)->first();
+        $subOption = SubOption::where('id', $id)->first();
         $input = $request->all();
-        $menu->update($input);
-        return response()->json($this->success($menu));
+        $subOption->update($input);
+        return response()->json($this->success($subOption));
     }
     /**
      * @OA\Delete(
-     *     path="/api/menu/delete/{id}",
-     *     tags={"Menu"},
-     *     summary="delete  Menu",
+     *     path="/api/subOption/delete/{id}",
+     *     tags={"SubOption"},
+     *     summary="delete  SubOption",
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -207,8 +195,8 @@ class MenuController extends Controller
      */
     public function delete($id)
     {
-        $menu = Menu::where('id', $id)->first();
-        $menu->delete();
+        $subOption = SubOption::where('id', $id)->first();
+        $subOption->delete();
         return response()->json($this->success());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Menu;
+namespace App\Http\Requests\Option;
 
 use App\Enums\ErrorCode;
 use App\Enums\ValidationErrorCode;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class MenuRequest extends FormRequest
+class OptionRequest extends FormRequest
 {
     use ResponseHandler;
     /**
@@ -29,7 +29,7 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => 'required',
+            'product_id' => 'required',
             'name_ar' => 'required|max:255',
             'name_en' => 'required|max:255',
         ];
@@ -38,7 +38,7 @@ class MenuRequest extends FormRequest
     public function messages()
     {
         return [
-            'branch_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'product_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'name_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),

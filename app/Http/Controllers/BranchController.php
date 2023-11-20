@@ -73,6 +73,10 @@ class BranchController extends Controller
      *                          property="mobile",
      *                          type="string",
      *                      ),
+     *                      @OA\Property(
+     *                          property="QR",
+     *                          type="string",
+     *                      ),
      *                 ),
      *                 example={
      *                     "restaurant_id":"restaurant_id",
@@ -82,6 +86,7 @@ class BranchController extends Controller
      *                     "address_en":"address_en",
      *                     "phone":"phone",
      *                     "mobile":"mobile",
+     *                     "QR":"QR",
      *                }
      *             )
      *         )
@@ -97,6 +102,7 @@ class BranchController extends Controller
      *              @OA\Property(property="address_en", type="string", example="address_en"),
      *              @OA\Property(property="phone", type="string", example="phone"),
      *              @OA\Property(property="mobile", type="string", example="mobile"),
+     *              @OA\Property(property="QR", type="string", example="QR"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -188,6 +194,10 @@ class BranchController extends Controller
      *                          property="mobile",
      *                          type="string",
      *                      ),
+     *                      @OA\Property(
+     *                          property="QR",
+     *                          type="string",
+     *                      ),
      *                 ),
      *                 example={
      *                     "restaurant_id":"restaurant_id",
@@ -197,6 +207,7 @@ class BranchController extends Controller
      *                     "address_en":"address_en",
      *                     "phone":"phone",
      *                     "mobile":"mobile",
+     *                     "QR":"QR",
      *                }
      *             )
      *         )
@@ -212,6 +223,7 @@ class BranchController extends Controller
      *              @OA\Property(property="address_en", type="string", example="address_en"),
      *              @OA\Property(property="phone", type="string", example="phone"),
      *              @OA\Property(property="mobile", type="string", example="mobile"),
+     *              @OA\Property(property="QR", type="string", example="QR"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )

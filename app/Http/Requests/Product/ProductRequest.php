@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Menu;
+namespace App\Http\Requests\Product;
 
 use App\Enums\ErrorCode;
 use App\Enums\ValidationErrorCode;
@@ -10,7 +10,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
-class MenuRequest extends FormRequest
+
+class ProductRequest extends FormRequest
 {
     use ResponseHandler;
     /**
@@ -29,20 +30,37 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => 'required',
+            'category_id' => 'required',
             'name_ar' => 'required|max:255',
             'name_en' => 'required|max:255',
+            'description_ar' => 'required|max:255',
+            'description_en' => 'required|max:255',
+            'price' => 'required|double',
+            'price_offer' => 'required|double',
+            'image',
+            'common',
+            'new',
+            'hidden',
+            'unavailable',
         ];
     }
 
     public function messages()
     {
         return [
-            'branch_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'category_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'name_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_en.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'description_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'description_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'description_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'description_en.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'price.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'price.double' => new ValidationErrorCode(ValidationErrorCode::_Double),
+            'price_offer.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'price_offer.double' => new ValidationErrorCode(ValidationErrorCode::_Double),
         ];
     }
     protected function failedValidation(Validator $validator)

@@ -36,6 +36,7 @@ class BranchRequest extends FormRequest
             'address_en' => 'required',
             'phone' => 'required',
             'mobile' => 'required',
+            'QR' => 'required',
         ];
     }
 
@@ -51,6 +52,7 @@ class BranchRequest extends FormRequest
             'address_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'mobile.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'phone.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'QR.required' => new ValidationErrorCode(ValidationErrorCode::Required),
         ];
     }
     protected function failedValidation(Validator $validator)

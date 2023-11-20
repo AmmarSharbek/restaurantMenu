@@ -25,4 +25,5 @@ final class ValidationErrorCode extends Enum
     const MinLength20 = 109;
     const Email = 110;
     const _Date = 111;
+    const _Double = 112;
 }

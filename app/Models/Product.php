@@ -7,34 +7,42 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Menu extends Model
+class Product extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
-        'branch_id',
+        'category_id',
         'name_en',
         'name_ar',
+        'description_ar',
+        'description_en',
+        'image',
+        'price',
+        'price_offer',
+        'common',
+        'new',
+        'hidden',
+        'unavailable',
     ];
 
     /**
-     * Get the branch that owns the Menu
+     * Get the category that owns the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function branch(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Branch::class, 'id', 'branch_id');
+        return $this->belongsTo(Category::class, 'id', 'category_id');
     }
-
     /**
-     * Get all of the category for the Menu
+     * Get all of the option for the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function category(): HasMany
+    public function option(): HasMany
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Option::class);
     }
 }
