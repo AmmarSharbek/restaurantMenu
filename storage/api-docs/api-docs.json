@@ -298,6 +298,991 @@
                 ]
             }
         },
+        "/api/branch": {
+            "get": {
+                "tags": [
+                    "Branch"
+                ],
+                "summary": "Get all Branch",
+                "operationId": "7a60d8d8fd907b42bfb98cf328e9b958",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/branch/store": {
+            "post": {
+                "tags": [
+                    "Branch"
+                ],
+                "description": "",
+                "operationId": "871c4487e83a3076748e73aabe9932c0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "address_ar": {
+                                                "type": "string"
+                                            },
+                                            "address_en": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "mobile": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "restaurant_id": "restaurant_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "address_ar": "address_ar",
+                                    "address_en": "address_en",
+                                    "phone": "phone",
+                                    "mobile": "mobile"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "restaurant_id": {
+                                            "type": "integr",
+                                            "example": "restaurant_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "address_ar": {
+                                            "type": "string",
+                                            "example": "address_ar"
+                                        },
+                                        "address_en": {
+                                            "type": "string",
+                                            "example": "address_en"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "mobile": {
+                                            "type": "string",
+                                            "example": "mobile"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/branch/show/{id}": {
+            "get": {
+                "tags": [
+                    "Branch"
+                ],
+                "summary": "Get  Branch",
+                "operationId": "628ee12c9268b45354c1b14dfa3303df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/branch/update/{id}": {
+            "post": {
+                "tags": [
+                    "Branch"
+                ],
+                "description": "",
+                "operationId": "03f7fc21d36bd4cbe0d4cb8bc5859f0a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "address_ar": {
+                                                "type": "string"
+                                            },
+                                            "address_en": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "mobile": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "restaurant_id": "restaurant_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "address_ar": "address_ar",
+                                    "address_en": "address_en",
+                                    "phone": "phone",
+                                    "mobile": "mobile"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "restaurant_id": {
+                                            "type": "integr",
+                                            "example": "restaurant_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "address_ar": {
+                                            "type": "string",
+                                            "example": "address_ar"
+                                        },
+                                        "address_en": {
+                                            "type": "string",
+                                            "example": "address_en"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "mobile": {
+                                            "type": "string",
+                                            "example": "mobile"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/branch/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Branch"
+                ],
+                "summary": "delete  Branch",
+                "operationId": "9efbe728b8635ca28859ae0a4b09fc1b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/restaurant": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "Get all Restaurant",
+                "operationId": "d650ee76148396c42f06ca15a7a862d1",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/restaurant/store": {
+            "post": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "description": "",
+                "operationId": "c7b83835b65f075e8675488da5e8ebcd",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
+                                                "type": "string"
+                                            },
+                                            "logo": {
+                                                "type": "string"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
+                                    "logo": "logo",
+                                    "currency": "currency"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
+                                        },
+                                        "logo": {
+                                            "type": "string",
+                                            "example": "logo"
+                                        },
+                                        "currency": {
+                                            "type": "string",
+                                            "example": "currency"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/restaurant/show/{id}": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "Get  constant",
+                "operationId": "f928ad027042d0fa5b2ff92f04894fe6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/restaurant/update/{id}": {
+            "post": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "description": "",
+                "operationId": "da4238cd69d119deb10fcdd468594441",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
+                                                "type": "string"
+                                            },
+                                            "logo": {
+                                                "type": "string"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
+                                    "logo": "logo",
+                                    "currency": "currency"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
+                                        },
+                                        "logo": {
+                                            "type": "string",
+                                            "example": "logo"
+                                        },
+                                        "currency": {
+                                            "type": "string",
+                                            "example": "currency"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/restaurant/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "delete  Restaurant",
+                "operationId": "42c6d8d635340033f5774db974ace566",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/style": {
+            "get": {
+                "tags": [
+                    "Style"
+                ],
+                "summary": "Get all Branch",
+                "operationId": "86a8b3fa75e10a99c81c836ff6ee9d9b",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/style/store": {
+            "post": {
+                "tags": [
+                    "Style"
+                ],
+                "description": "",
+                "operationId": "78992ff6af8e1973ffb91982a8ac9a68",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "primary_font_color": {
+                                                "type": "string"
+                                            },
+                                            "secondary_font_color": {
+                                                "type": "string"
+                                            },
+                                            "background_color": {
+                                                "type": "string"
+                                            },
+                                            "shadow_color": {
+                                                "type": "string"
+                                            },
+                                            "primary_category_color": {
+                                                "type": "string"
+                                            },
+                                            "secondary_category_color": {
+                                                "type": "string"
+                                            },
+                                            "price_color": {
+                                                "type": "string"
+                                            },
+                                            "price_offer_color": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "restaurant_id": "restaurant_id",
+                                    "primary_font_color": "primary_font_color",
+                                    "secondary_font_color": "secondary_font_color",
+                                    "background_color": "background_color",
+                                    "shadow_color": "shadow_color",
+                                    "primary_category_color": "primary_category_color",
+                                    "secondary_category_color": "secondary_category_color",
+                                    "price_color": "price_color",
+                                    "price_offer_color": "price_offer_color"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "restaurant_id": {
+                                            "type": "integr",
+                                            "example": "restaurant_id"
+                                        },
+                                        "primary_font_color": {
+                                            "type": "string",
+                                            "example": "primary_font_color"
+                                        },
+                                        "secondary_font_color": {
+                                            "type": "string",
+                                            "example": "secondary_font_color"
+                                        },
+                                        "background_color": {
+                                            "type": "string",
+                                            "example": "background_color"
+                                        },
+                                        "shadow_color": {
+                                            "type": "string",
+                                            "example": "shadow_color"
+                                        },
+                                        "primary_category_color": {
+                                            "type": "string",
+                                            "example": "primary_category_color"
+                                        },
+                                        "secondary_category_color": {
+                                            "type": "string",
+                                            "example": "secondary_category_color"
+                                        },
+                                        "price_color": {
+                                            "type": "string",
+                                            "example": "price_color"
+                                        },
+                                        "price_offer_color": {
+                                            "type": "string",
+                                            "example": "price_offer_color"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/style/show/{id}": {
+            "get": {
+                "tags": [
+                    "Style"
+                ],
+                "summary": "Get  Style",
+                "operationId": "07f0f5d7ecd59b5431b51ae3699e6935",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/style/update/{id}": {
+            "post": {
+                "tags": [
+                    "Style"
+                ],
+                "description": "",
+                "operationId": "330f623086e0fef0b27290fb64ae737e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "primary_font_color": {
+                                                "type": "string"
+                                            },
+                                            "secondary_font_color": {
+                                                "type": "string"
+                                            },
+                                            "background_color": {
+                                                "type": "string"
+                                            },
+                                            "shadow_color": {
+                                                "type": "string"
+                                            },
+                                            "primary_category_color": {
+                                                "type": "string"
+                                            },
+                                            "secondary_category_color": {
+                                                "type": "string"
+                                            },
+                                            "price_color": {
+                                                "type": "string"
+                                            },
+                                            "price_offer_color": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "restaurant_id": "restaurant_id",
+                                    "primary_font_color": "primary_font_color",
+                                    "secondary_font_color": "secondary_font_color",
+                                    "background_color": "background_color",
+                                    "shadow_color": "shadow_color",
+                                    "primary_category_color": "primary_category_color",
+                                    "secondary_category_color": "secondary_category_color",
+                                    "price_color": "price_color",
+                                    "price_offer_color": "price_offer_color"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "restaurant_id": {
+                                            "type": "integr",
+                                            "example": "restaurant_id"
+                                        },
+                                        "primary_font_color": {
+                                            "type": "string",
+                                            "example": "primary_font_color"
+                                        },
+                                        "secondary_font_color": {
+                                            "type": "string",
+                                            "example": "secondary_font_color"
+                                        },
+                                        "background_color": {
+                                            "type": "string",
+                                            "example": "background_color"
+                                        },
+                                        "shadow_color": {
+                                            "type": "string",
+                                            "example": "shadow_color"
+                                        },
+                                        "primary_category_color": {
+                                            "type": "string",
+                                            "example": "primary_category_color"
+                                        },
+                                        "secondary_category_color": {
+                                            "type": "string",
+                                            "example": "secondary_category_color"
+                                        },
+                                        "price_color": {
+                                            "type": "string",
+                                            "example": "price_color"
+                                        },
+                                        "price_offer_color": {
+                                            "type": "string",
+                                            "example": "price_offer_color"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/style/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Style"
+                ],
+                "summary": "delete  Style",
+                "operationId": "538147287391ce613cbecbb8a62c1cae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
         "/api/tenantProfile": {
             "get": {
                 "tags": [
