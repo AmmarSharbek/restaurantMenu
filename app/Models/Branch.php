@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Branch extends Model
 {
@@ -29,5 +30,15 @@ class Branch extends Model
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class, 'id', 'restaurant_id');
+    }
+
+    /**
+     * Get all of the menu for the Branch
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function menu(): HasMany
+    {
+        return $this->hasMany(Menu::class);
     }
 }

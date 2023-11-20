@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\StyleController;
 use App\Http\Controllers\TenantProfileController;
@@ -46,6 +47,12 @@ Route::post('/style/store', [StyleController::class, "store"]);
 Route::get('/style/show/{id}', [StyleController::class, "show"]);
 Route::post('/style/update/{id}', [StyleController::class, "update"]);
 Route::delete('/style/delete/{id}', [StyleController::class, "delete"]);
+
+Route::get('/menu', [MenuController::class, "index"]);
+Route::post('/menu/store', [MenuController::class, "store"]);
+Route::get('/menu/show/{id}', [MenuController::class, "show"]);
+Route::post('/menu/update/{id}', [MenuController::class, "update"]);
+Route::delete('/menu/delete/{id}', [MenuController::class, "delete"]);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, "me"]);

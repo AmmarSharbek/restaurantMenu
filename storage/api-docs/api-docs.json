@@ -621,6 +621,281 @@
                 }
             }
         },
+        "/api/menu": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Get all Menu",
+                "operationId": "3a3ec03d97e4c627a3506161fc36a01e",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/menu/store": {
+            "post": {
+                "tags": [
+                    "Menu"
+                ],
+                "description": "",
+                "operationId": "c51b465ac769d2c73a054d6747ac5b0d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "QR": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "branch_id": "branch_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "QR": "QR"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "QR": {
+                                            "type": "string",
+                                            "example": "QR"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/show/{id}": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Get  Menu",
+                "operationId": "7ca5e2b35289e92a47d821673388c609",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/menu/update/{id}": {
+            "post": {
+                "tags": [
+                    "Menu"
+                ],
+                "description": "",
+                "operationId": "374b01fd65472146b936c7e75bbbea1e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
+                                            "QR": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "branch_id": "branch_id",
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "QR": "QR"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
+                                        "QR": {
+                                            "type": "string",
+                                            "example": "QR"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/menu/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "delete  Menu",
+                "operationId": "705879a63ff554b5d52d3ac8067b8a24",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
         "/api/restaurant": {
             "get": {
                 "tags": [

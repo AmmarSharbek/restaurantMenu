@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Restaurant extends Model
 {
@@ -28,5 +29,15 @@ class Restaurant extends Model
     public function branch(): HasMany
     {
         return $this->hasMany(Branch::class);
+    }
+
+    /**
+     * Get the style associated with the Restaurant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function style(): HasOne
+    {
+        return $this->hasOne(Style::class);
     }
 }
