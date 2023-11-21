@@ -142,7 +142,7 @@ class ProductController extends Controller
     {
         $input = $request->all();
         $image_path = "";
-        if ($request->has('data.image')) {
+        if ($request->has('image')) {
             $image_path = $request->file('image')->store('image', 'public_uploads');
         }
         $input['image'] = $image_path;

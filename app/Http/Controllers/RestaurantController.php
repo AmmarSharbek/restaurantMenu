@@ -106,7 +106,7 @@ class RestaurantController extends Controller
     {
         $input = $request->all();
         $image_path = "";
-        if ($request->has('data.logo')) {
+        if ($request->has('logo')) {
             $image_path = $request->file('logo')->store('image', 'public_uploads');
         }
         $input['logo'] = $image_path;
