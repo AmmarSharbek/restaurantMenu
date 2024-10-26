@@ -26,4 +26,5 @@ final class ValidationErrorCode extends Enum
     const Email = 110;
     const _Date = 111;
     const _Double = 112;
+    const Regex = 113;
 }

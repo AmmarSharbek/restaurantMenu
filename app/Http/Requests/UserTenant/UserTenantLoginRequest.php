@@ -30,7 +30,8 @@ class UserTenantLoginRequest extends FormRequest
     {
         return [
             'phone' => 'required|max:255',
-            'userPassTenant' => 'required|max:255'
+            'userPassTenant' => 'required|max:255',
+            'idRestaurant',
         ];
     }
     public function messages()

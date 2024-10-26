@@ -42,7 +42,7 @@ class AuthController extends Controller
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="email",
+     *                          property="phone",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
@@ -51,7 +51,7 @@ class AuthController extends Controller
      *                      ),
      *                      @OA\Property(
      *                          property="isAdmin",
-     *                          type="boolean"
+     *                          type="integer"
      *                      ),
      *                      @OA\Property(
      *                          property="sumPermessions",
@@ -60,7 +60,7 @@ class AuthController extends Controller
      *                 ),
      *                 example={
      *                     "name":"name",
-     *                     "email":"email",
+     *                     "phone":"phone",
      *                     "password":"password",
      *                     "isAdmin":"isAdmin",
      *                     "sumPermessions":"sumPermessions",
@@ -73,9 +73,9 @@ class AuthController extends Controller
      *          description="success",
      *          @OA\JsonContent(
      *              @OA\Property(property="name", type="string", example="name"),
-     *              @OA\Property(property="email", type="string", example="email"),
+     *              @OA\Property(property="phone", type="string", example="phone"),
      *              @OA\Property(property="password", type="string", example="password"),
-     *              @OA\Property(property="isAdmin", type="boolean", example="isAdmin"),
+     *              @OA\Property(property="isAdmin", type="integer", example="isAdmin"),
      *              @OA\Property(property="sumPermessions", type="integer", example="sumPermessions"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
@@ -94,8 +94,8 @@ class AuthController extends Controller
     {
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
-            "password" => Hash::make($request->password),
+            'phone' => $request->phone,
+            "password" => encrypt($request->password),
             "isAdmin" => $request->isAdmin,
             "sumPermessions" => $request->sumPermessions,
         ]);
@@ -121,7 +121,7 @@ class AuthController extends Controller
      *                 @OA\Property(
      *                      type="object",
      *                      @OA\Property(
-     *                          property="name",
+     *                          property="phone",
      *                          type="string"
      *                      ),
      *                      @OA\Property(
@@ -130,7 +130,7 @@ class AuthController extends Controller
      *                      )
      *                 ),
      *                 example={
-     *                     "name":"name",
+     *                     "phone":"phone",
      *                     "password":"password",
      *                }
      *             )
@@ -140,7 +140,7 @@ class AuthController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="name", type="string", example="name"),
+     *              @OA\Property(property="phone", type="string", example="phone"),
      *              @OA\Property(property="password", type="string", example="password"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
@@ -158,10 +158,10 @@ class AuthController extends Controller
 
     public function login(UserLoginRequest $request)
     {
-        $credentials = request(['name', 'password']);
+        $credentials = request(['phone', 'password']);
         // return auth()->attempt($credentials);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json($this->error(new ErrorCode(ErrorCode::CredentialsError)));
+            return response()->json($this->error(new ErrorCode(ErrorCode::CredentialsError)), 422);
         }
 
         $user = Auth::user();
@@ -225,12 +225,51 @@ class AuthController extends Controller
         $user = $request->user();
         $request->user()->tokens()->delete();
 
+
         return response()->json([
             'user' => $user,
             'token' => $request->user()->createToken('Api Token of')->plainTextToken,
         ]);
     }
 
+    /**
+     * refresh
+     * @OA\Get(
+     *     path="/api/refreshWithIdRes/{restaurant_id}",
+     *     tags={"Auth"},
+     *      security={{"sanctum":{}}},
+     *      @OA\Parameter(
+     *         in="path",
+     *         name="restaurant_id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="invalid",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="msg", type="string", example="fail"),
+     *          )
+     *      )
+     * )
+     */
+    public function refreshWithIdRes($restaurant_id, Request $request): JsonResponse
+    {
+        $user = $request->user();
+        $request->user()->tokens()->delete();
+        $token = $user->createToken($restaurant_id)->plainTextToken;
+        $token1 = PersonalAccessToken::findToken($token);
+        $token1->expires_at = $token1->created_at->addMonths(1);
+        return response()->json([
+            'user' => $user,
+            'token' => $token,
+            'expires_at' => $token1->expires_at
+        ]);
+    }
     /**
      * logout
      * @OA\Post(

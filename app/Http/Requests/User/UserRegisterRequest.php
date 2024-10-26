@@ -30,7 +30,7 @@ class UserRegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|unique:users,name',
-            'email' => 'required|max:255|unique:users,email',
+            'phone' => 'required|max:255|unique:users,phone',
             'password' => 'required|max:255',
             'isAdmin' => 'required',
         ];
@@ -42,9 +42,9 @@ class UserRegisterRequest extends FormRequest
             'name.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'name.unique' => new ValidationErrorCode(ValidationErrorCode::Unique),
-            'email.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'email.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
-            'email.unique' => new ValidationErrorCode(ValidationErrorCode::Unique),
+            'phone.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'phone.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'phone.unique' => new ValidationErrorCode(ValidationErrorCode::Unique),
             'password.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'password.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'isAdmin.required' => new ValidationErrorCode(ValidationErrorCode::Required),

@@ -32,4 +32,14 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     {
         return $this->hasMany(User::class);
     }
+
+    /**
+     * Get all of the domin for the Tenant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function domin(): HasMany
+    {
+        return $this->hasMany(Domain::class);
+    }
 }

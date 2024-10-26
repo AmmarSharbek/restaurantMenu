@@ -24,14 +24,14 @@
                                             "name": {
                                                 "type": "string"
                                             },
-                                            "email": {
+                                            "phone": {
                                                 "type": "string"
                                             },
                                             "password": {
                                                 "type": "string"
                                             },
                                             "isAdmin": {
-                                                "type": "boolean"
+                                                "type": "integer"
                                             },
                                             "sumPermessions": {
                                                 "type": "integer"
@@ -43,7 +43,7 @@
                                 "type": "object",
                                 "example": {
                                     "name": "name",
-                                    "email": "email",
+                                    "phone": "phone",
                                     "password": "password",
                                     "isAdmin": "isAdmin",
                                     "sumPermessions": "sumPermessions"
@@ -63,16 +63,16 @@
                                             "type": "string",
                                             "example": "name"
                                         },
-                                        "email": {
+                                        "phone": {
                                             "type": "string",
-                                            "example": "email"
+                                            "example": "phone"
                                         },
                                         "password": {
                                             "type": "string",
                                             "example": "password"
                                         },
                                         "isAdmin": {
-                                            "type": "boolean",
+                                            "type": "integer",
                                             "example": "isAdmin"
                                         },
                                         "sumPermessions": {
@@ -126,7 +126,7 @@
                                 "properties": {
                                     "": {
                                         "properties": {
-                                            "name": {
+                                            "phone": {
                                                 "type": "string"
                                             },
                                             "password": {
@@ -138,7 +138,7 @@
                                 },
                                 "type": "object",
                                 "example": {
-                                    "name": "name",
+                                    "phone": "phone",
                                     "password": "password"
                                 }
                             }
@@ -152,9 +152,9 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "name": {
+                                        "phone": {
                                             "type": "string",
-                                            "example": "name"
+                                            "example": "phone"
                                         },
                                         "password": {
                                             "type": "string",
@@ -263,6 +263,51 @@
                 ]
             }
         },
+        "/api/refreshWithIdRes/{restaurant_id}": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "refresh",
+                "operationId": "117bbbc0d19043189032b350a6c81763",
+                "parameters": [
+                    {
+                        "name": "restaurant_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/logout": {
             "post": {
                 "tags": [
@@ -312,7 +357,34 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/branch/getBranch": {
+            "get": {
+                "tags": [
+                    "Branch"
+                ],
+                "summary": "Get  Branch",
+                "operationId": "7017ddb323b2fe5d3eea2154fe59f4e2",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/branch/store": {
@@ -336,6 +408,12 @@
                                                 "type": "string"
                                             },
                                             "name_en": {
+                                                "type": "string"
+                                            },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
                                                 "type": "string"
                                             },
                                             "address_ar": {
@@ -362,6 +440,8 @@
                                     "restaurant_id": "restaurant_id",
                                     "name_ar": "name_ar",
                                     "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
                                     "address_ar": "address_ar",
                                     "address_en": "address_en",
                                     "phone": "phone",
@@ -390,6 +470,14 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
                                         },
                                         "address_ar": {
                                             "type": "string",
@@ -441,7 +529,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/branch/show/{id}": {
@@ -468,7 +561,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/branch/update/{id}": {
@@ -504,6 +602,12 @@
                                             "name_en": {
                                                 "type": "string"
                                             },
+                                            "description_ar": {
+                                                "type": "string"
+                                            },
+                                            "description_en": {
+                                                "type": "string"
+                                            },
                                             "address_ar": {
                                                 "type": "string"
                                             },
@@ -528,6 +632,8 @@
                                     "restaurant_id": "restaurant_id",
                                     "name_ar": "name_ar",
                                     "name_en": "name_en",
+                                    "description_ar": "description_ar",
+                                    "description_en": "description_en",
                                     "address_ar": "address_ar",
                                     "address_en": "address_en",
                                     "phone": "phone",
@@ -556,6 +662,14 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "description_ar": {
+                                            "type": "string",
+                                            "example": "description_ar"
+                                        },
+                                        "description_en": {
+                                            "type": "string",
+                                            "example": "description_en"
                                         },
                                         "address_ar": {
                                             "type": "string",
@@ -607,7 +721,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/branch/delete/{id}": {
@@ -634,7 +753,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/category": {
@@ -651,7 +775,44 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/category/getCategory/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get  Category",
+                "operationId": "0b4bd05ebc59b8b86832ef9ecbfc5784",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/category/store": {
@@ -676,6 +837,9 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -685,7 +849,8 @@
                                 "example": {
                                     "menu_id": "menu_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en"
+                                    "name_en": "name_en",
+                                    "image": "image"
                                 }
                             }
                         }
@@ -709,6 +874,10 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -740,7 +909,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/category/show/{id}": {
@@ -767,7 +941,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/category/update/{id}": {
@@ -802,6 +981,9 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -812,7 +994,7 @@
                                     "menu_id": "menu_id",
                                     "name_ar": "name_ar",
                                     "name_en": "name_en",
-                                    "QR": "QR"
+                                    "image": "image"
                                 }
                             }
                         }
@@ -836,6 +1018,10 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -867,7 +1053,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/category/delete/{id}": {
@@ -894,7 +1085,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/menu": {
@@ -911,7 +1107,44 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/menu/getMenu/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Get  Menu",
+                "operationId": "41acbb21b266290db9d895da1a665ba6",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/menu/store": {
@@ -936,6 +1169,9 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -945,7 +1181,8 @@
                                 "example": {
                                     "branch_id": "branch_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en"
+                                    "name_en": "name_en",
+                                    "image": "image"
                                 }
                             }
                         }
@@ -969,6 +1206,10 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -1000,7 +1241,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/menu/show/{id}": {
@@ -1027,7 +1273,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/menu/update/{id}": {
@@ -1062,6 +1313,9 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
                                             }
                                         },
                                         "type": "object"
@@ -1071,7 +1325,8 @@
                                 "example": {
                                     "branch_id": "branch_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en"
+                                    "name_en": "name_en",
+                                    "image": "image"
                                 }
                             }
                         }
@@ -1095,6 +1350,10 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "image"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -1126,7 +1385,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/menu/delete/{id}": {
@@ -1153,7 +1417,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/option": {
@@ -1170,7 +1439,44 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/option/getOption/{product_id}": {
+            "get": {
+                "tags": [
+                    "Option"
+                ],
+                "summary": "Get all Option",
+                "operationId": "f64bd27d3ba81d67e4d49b99fbc6cdb0",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/option/store": {
@@ -1195,6 +1501,12 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number"
                                             }
                                         },
                                         "type": "object"
@@ -1204,7 +1516,9 @@
                                 "example": {
                                     "product_id": "product_id",
                                     "name_ar": "name_ar",
-                                    "name_en": "name_en"
+                                    "name_en": "name_en",
+                                    "value": "value",
+                                    "price": "price"
                                 }
                             }
                         }
@@ -1228,6 +1542,14 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "value": {
+                                            "type": "char",
+                                            "example": "value"
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "price"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -1259,7 +1581,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/option/show/{id}": {
@@ -1286,7 +1613,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/option/update/{id}": {
@@ -1321,6 +1653,12 @@
                                             },
                                             "name_en": {
                                                 "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number"
                                             }
                                         },
                                         "type": "object"
@@ -1331,7 +1669,8 @@
                                     "product_id": "product_id",
                                     "name_ar": "name_ar",
                                     "name_en": "name_en",
-                                    "QR": "QR"
+                                    "value": "value",
+                                    "price": "price"
                                 }
                             }
                         }
@@ -1355,6 +1694,14 @@
                                         "name_en": {
                                             "type": "string",
                                             "example": "name_en"
+                                        },
+                                        "value": {
+                                            "type": "char",
+                                            "example": "value"
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": "price"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -1413,7 +1760,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/product": {
@@ -1430,7 +1782,108 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product/getProduct/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get  Product",
+                "operationId": "57a118f5da85feaf7481a217436473e2",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product/getProductWithOption/{category_id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get  Product",
+                "operationId": "5d3c8d7d0c426cf16cd5d934c57c49a3",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product/getProductWithOptionById/{product_id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get  Product",
+                "operationId": "5a17aedf09955b02444eff68d6afa3ba",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/product/store": {
@@ -1595,7 +2048,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/product/show/{id}": {
@@ -1622,7 +2080,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/product/update/{id}": {
@@ -1797,7 +2260,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/product/delete/{id}": {
@@ -1824,7 +2292,133 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product/sortPrdouct": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Sort products",
+                "operationId": "1abc39dcfaec55cf9d08b54af2814f65",
+                "requestBody": {
+                    "description": "Request body for sorting products",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "arr": {
+                                        "description": "Array of products with sort order",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID of the product to sort",
+                                                    "type": "integer"
+                                                },
+                                                "sortNum": {
+                                                    "description": "New sort number for the product",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Products sorted successfully"
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Invalid request parameters"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product/getsortPrdouct/{category_id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Get sorted products by category ID",
+                "operationId": "6f43da262840a3bbaa9dab18e9fffc5b",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "path",
+                        "description": "ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sorted products retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Category not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/restaurant": {
@@ -1841,7 +2435,34 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/restaurant/getRestaurant": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "Get  Restaurant",
+                "operationId": "900e9a33a9b004433791dfed0a5ca11c",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/restaurant/store": {
@@ -1873,8 +2494,17 @@
                                             "logo": {
                                                 "type": "string"
                                             },
+                                            "default_image": {
+                                                "type": "string"
+                                            },
                                             "currency": {
                                                 "type": "string"
+                                            },
+                                            "domin": {
+                                                "type": "string"
+                                            },
+                                            "isActive": {
+                                                "type": "boolean"
                                             }
                                         },
                                         "type": "object"
@@ -1887,7 +2517,10 @@
                                     "description_ar": "description_ar",
                                     "description_en": "description_en",
                                     "logo": "logo",
-                                    "currency": "currency"
+                                    "default_image": "default_image",
+                                    "currency": "currency",
+                                    "domin": "domin",
+                                    "isActive": "0"
                                 }
                             }
                         }
@@ -1920,9 +2553,21 @@
                                             "type": "string",
                                             "example": "logo"
                                         },
+                                        "default_image": {
+                                            "type": "string",
+                                            "example": "default_image"
+                                        },
                                         "currency": {
                                             "type": "string",
                                             "example": "currency"
+                                        },
+                                        "domin": {
+                                            "type": "string",
+                                            "example": "domin"
+                                        },
+                                        "isActive": {
+                                            "type": "string",
+                                            "example": "0"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -1954,7 +2599,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/restaurant/show/{id}": {
@@ -1981,7 +2631,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/restaurant/update/{id}": {
@@ -2023,8 +2678,17 @@
                                             "logo": {
                                                 "type": "string"
                                             },
+                                            "default_image": {
+                                                "type": "string"
+                                            },
                                             "currency": {
                                                 "type": "string"
+                                            },
+                                            "domin": {
+                                                "type": "string"
+                                            },
+                                            "isActive": {
+                                                "type": "boolean"
                                             }
                                         },
                                         "type": "object"
@@ -2037,7 +2701,10 @@
                                     "description_ar": "description_ar",
                                     "description_en": "description_en",
                                     "logo": "logo",
-                                    "currency": "currency"
+                                    "default_image": "default_image",
+                                    "currency": "currency",
+                                    "domin": "domin",
+                                    "isActive": "0"
                                 }
                             }
                         }
@@ -2070,9 +2737,21 @@
                                             "type": "string",
                                             "example": "logo"
                                         },
+                                        "default_image": {
+                                            "type": "string",
+                                            "example": "default_image"
+                                        },
                                         "currency": {
                                             "type": "string",
                                             "example": "currency"
+                                        },
+                                        "domin": {
+                                            "type": "string",
+                                            "example": "domin"
+                                        },
+                                        "isActive": {
+                                            "type": "string",
+                                            "example": "0"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -2104,7 +2783,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/restaurant/delete/{id}": {
@@ -2131,16 +2815,21 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
-        "/api/style": {
+        "/api/socialMedia": {
             "get": {
                 "tags": [
-                    "Style"
+                    "SocialMedia"
                 ],
-                "summary": "Get all Branch",
-                "operationId": "86a8b3fa75e10a99c81c836ff6ee9d9b",
+                "summary": "Get all SocialMedia",
+                "operationId": "81a8b09c09b9293957705e5a5df18b91",
                 "responses": {
                     "200": {
                         "description": "Everything OK"
@@ -2148,16 +2837,43 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
-        "/api/style/store": {
+        "/api/socialMedia/getSocialMedia": {
+            "get": {
+                "tags": [
+                    "SocialMedia"
+                ],
+                "summary": "Get  SocialMedia",
+                "operationId": "23022827528338e16690bd7ccdc6b7e2",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/socialMedia/store": {
             "post": {
                 "tags": [
-                    "Style"
+                    "SocialMedia"
                 ],
                 "description": "",
-                "operationId": "78992ff6af8e1973ffb91982a8ac9a68",
+                "operationId": "b0f8c88bcd739bb2d49616d216e63883",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2165,31 +2881,13 @@
                                 "properties": {
                                     "": {
                                         "properties": {
-                                            "restaurant_id": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "type": {
                                                 "type": "integer"
                                             },
-                                            "primary_font_color": {
-                                                "type": "string"
-                                            },
-                                            "secondary_font_color": {
-                                                "type": "string"
-                                            },
-                                            "background_color": {
-                                                "type": "string"
-                                            },
-                                            "shadow_color": {
-                                                "type": "string"
-                                            },
-                                            "primary_category_color": {
-                                                "type": "string"
-                                            },
-                                            "secondary_category_color": {
-                                                "type": "string"
-                                            },
-                                            "price_color": {
-                                                "type": "string"
-                                            },
-                                            "price_offer_color": {
+                                            "value": {
                                                 "type": "string"
                                             }
                                         },
@@ -2198,15 +2896,9 @@
                                 },
                                 "type": "object",
                                 "example": {
-                                    "restaurant_id": "restaurant_id",
-                                    "primary_font_color": "primary_font_color",
-                                    "secondary_font_color": "secondary_font_color",
-                                    "background_color": "background_color",
-                                    "shadow_color": "shadow_color",
-                                    "primary_category_color": "primary_category_color",
-                                    "secondary_category_color": "secondary_category_color",
-                                    "price_color": "price_color",
-                                    "price_offer_color": "price_offer_color"
+                                    "name": "name",
+                                    "type": "0",
+                                    "value": "value"
                                 }
                             }
                         }
@@ -2219,41 +2911,290 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "restaurant_id": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "0"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "value"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/socialMedia/show/{id}": {
+            "get": {
+                "tags": [
+                    "SocialMedia"
+                ],
+                "summary": "Get  SocialMedia",
+                "operationId": "6ef74b2757adb776392af0ef36aa47a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/socialMedia/update/{id}": {
+            "post": {
+                "tags": [
+                    "SocialMedia"
+                ],
+                "description": "",
+                "operationId": "e6f5033df4423547f4662b76f4d62581",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "integer"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "name",
+                                    "type": "0",
+                                    "value": "value"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "0"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "value"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/socialMedia/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "SocialMedia"
+                ],
+                "summary": "delete  SocialMedia",
+                "operationId": "db2e5b63725d580ccc41e8437cadae40",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/showVisitWithDate": {
+            "post": {
+                "tags": [
+                    "Statistics Visit"
+                ],
+                "description": "",
+                "operationId": "a563e745e2a1ead4fb54c4906c076be4",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "startDate": {
+                                                "type": "string"
+                                            },
+                                            "endDate": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "product",
+                                    "id": "1",
+                                    "startDate": "2024-8-24",
+                                    "endDate": "2024-8-24"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "product"
+                                        },
+                                        "id": {
                                             "type": "integr",
-                                            "example": "restaurant_id"
+                                            "example": "1"
                                         },
-                                        "primary_font_color": {
+                                        "startDate": {
                                             "type": "string",
-                                            "example": "primary_font_color"
+                                            "example": "2024-8-24"
                                         },
-                                        "secondary_font_color": {
+                                        "endDate": {
                                             "type": "string",
-                                            "example": "secondary_font_color"
-                                        },
-                                        "background_color": {
-                                            "type": "string",
-                                            "example": "background_color"
-                                        },
-                                        "shadow_color": {
-                                            "type": "string",
-                                            "example": "shadow_color"
-                                        },
-                                        "primary_category_color": {
-                                            "type": "string",
-                                            "example": "primary_category_color"
-                                        },
-                                        "secondary_category_color": {
-                                            "type": "string",
-                                            "example": "secondary_category_color"
-                                        },
-                                        "price_color": {
-                                            "type": "string",
-                                            "example": "price_color"
-                                        },
-                                        "price_offer_color": {
-                                            "type": "string",
-                                            "example": "price_offer_color"
+                                            "example": "2024-8-24"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -2288,6 +3229,192 @@
                 }
             }
         },
+        "/api/style": {
+            "get": {
+                "tags": [
+                    "Style"
+                ],
+                "summary": "Get all Branch",
+                "operationId": "86a8b3fa75e10a99c81c836ff6ee9d9b",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/style/getStyle": {
+            "get": {
+                "tags": [
+                    "Style"
+                ],
+                "summary": "Get  Style",
+                "operationId": "3f95ea8a8b788937ea40a7f606239a93",
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/style/store": {
+            "post": {
+                "tags": [
+                    "Style"
+                ],
+                "description": "",
+                "operationId": "78992ff6af8e1973ffb91982a8ac9a68",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "restaurant_id": {
+                                                "type": "integer"
+                                            },
+                                            "primary": {
+                                                "type": "string"
+                                            },
+                                            "onPrimary": {
+                                                "type": "string"
+                                            },
+                                            "secondary": {
+                                                "type": "string"
+                                            },
+                                            "onSecondary": {
+                                                "type": "string"
+                                            },
+                                            "enable": {
+                                                "type": "string"
+                                            },
+                                            "disable": {
+                                                "type": "string"
+                                            },
+                                            "background": {
+                                                "type": "string"
+                                            },
+                                            "onBackground": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "restaurant_id": "restaurant_id",
+                                    "primary": "primary",
+                                    "onPrimary": "onPrimary",
+                                    "secondary": "secondary",
+                                    "onSecondary": "onSecondary",
+                                    "enable": "enable",
+                                    "disable": "disable",
+                                    "background": "background",
+                                    "onBackground": "onBackground"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "restaurant_id": {
+                                            "type": "integr",
+                                            "example": "restaurant_id"
+                                        },
+                                        "primary": {
+                                            "type": "string",
+                                            "example": "primary"
+                                        },
+                                        "onPrimary": {
+                                            "type": "string",
+                                            "example": "onPrimary"
+                                        },
+                                        "secondary": {
+                                            "type": "string",
+                                            "example": "secondary"
+                                        },
+                                        "onSecondary": {
+                                            "type": "string",
+                                            "example": "onSecondary"
+                                        },
+                                        "enable": {
+                                            "type": "string",
+                                            "example": "enable"
+                                        },
+                                        "disable": {
+                                            "type": "string",
+                                            "example": "disable"
+                                        },
+                                        "background": {
+                                            "type": "string",
+                                            "example": "background"
+                                        },
+                                        "onBackground": {
+                                            "type": "string",
+                                            "example": "onBackground"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/style/show/{id}": {
             "get": {
                 "tags": [
@@ -2312,7 +3439,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/style/update/{id}": {
@@ -2342,28 +3474,28 @@
                                             "restaurant_id": {
                                                 "type": "integer"
                                             },
-                                            "primary_font_color": {
+                                            "primary": {
                                                 "type": "string"
                                             },
-                                            "secondary_font_color": {
+                                            "onPrimary": {
                                                 "type": "string"
                                             },
-                                            "background_color": {
+                                            "secondary": {
                                                 "type": "string"
                                             },
-                                            "shadow_color": {
+                                            "onSecondary": {
                                                 "type": "string"
                                             },
-                                            "primary_category_color": {
+                                            "enable": {
                                                 "type": "string"
                                             },
-                                            "secondary_category_color": {
+                                            "disable": {
                                                 "type": "string"
                                             },
-                                            "price_color": {
+                                            "background": {
                                                 "type": "string"
                                             },
-                                            "price_offer_color": {
+                                            "onBackground": {
                                                 "type": "string"
                                             }
                                         },
@@ -2373,14 +3505,14 @@
                                 "type": "object",
                                 "example": {
                                     "restaurant_id": "restaurant_id",
-                                    "primary_font_color": "primary_font_color",
-                                    "secondary_font_color": "secondary_font_color",
-                                    "background_color": "background_color",
-                                    "shadow_color": "shadow_color",
-                                    "primary_category_color": "primary_category_color",
-                                    "secondary_category_color": "secondary_category_color",
-                                    "price_color": "price_color",
-                                    "price_offer_color": "price_offer_color"
+                                    "primary": "primary",
+                                    "onPrimary": "onPrimary",
+                                    "secondary": "secondary",
+                                    "onSecondary": "onSecondary",
+                                    "enable": "enable",
+                                    "disable": "disable",
+                                    "background": "background",
+                                    "onBackground": "onBackground"
                                 }
                             }
                         }
@@ -2397,37 +3529,37 @@
                                             "type": "integr",
                                             "example": "restaurant_id"
                                         },
-                                        "primary_font_color": {
+                                        "primary": {
                                             "type": "string",
-                                            "example": "primary_font_color"
+                                            "example": "primary"
                                         },
-                                        "secondary_font_color": {
+                                        "onPrimary": {
                                             "type": "string",
-                                            "example": "secondary_font_color"
+                                            "example": "onPrimary"
                                         },
-                                        "background_color": {
+                                        "secondary": {
                                             "type": "string",
-                                            "example": "background_color"
+                                            "example": "secondary"
                                         },
-                                        "shadow_color": {
+                                        "onSecondary": {
                                             "type": "string",
-                                            "example": "shadow_color"
+                                            "example": "onSecondary"
                                         },
-                                        "primary_category_color": {
+                                        "enable": {
                                             "type": "string",
-                                            "example": "primary_category_color"
+                                            "example": "enable"
                                         },
-                                        "secondary_category_color": {
+                                        "disable": {
                                             "type": "string",
-                                            "example": "secondary_category_color"
+                                            "example": "disable"
                                         },
-                                        "price_color": {
+                                        "background": {
                                             "type": "string",
-                                            "example": "price_color"
+                                            "example": "background"
                                         },
-                                        "price_offer_color": {
+                                        "onBackground": {
                                             "type": "string",
-                                            "example": "price_offer_color"
+                                            "example": "onBackground"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -2459,7 +3591,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/style/delete/{id}": {
@@ -2486,7 +3623,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/subOption": {
@@ -2503,7 +3645,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/subOption/store": {
@@ -2523,8 +3670,18 @@
                                             "option_id": {
                                                 "type": "integer"
                                             },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
                                             "value": {
                                                 "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "double"
                                             }
                                         },
                                         "type": "object"
@@ -2533,7 +3690,10 @@
                                 "type": "object",
                                 "example": {
                                     "option_id": "option_id",
-                                    "value": "value"
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "value": "value",
+                                    "price": "price"
                                 }
                             }
                         }
@@ -2550,9 +3710,22 @@
                                             "type": "integr",
                                             "example": "option_id"
                                         },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
                                         "value": {
                                             "type": "string",
                                             "example": "value"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -2584,7 +3757,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/subOption/show/{id}": {
@@ -2611,7 +3789,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/subOption/update/{id}": {
@@ -2641,8 +3824,18 @@
                                             "option_id": {
                                                 "type": "integer"
                                             },
+                                            "name_ar": {
+                                                "type": "string"
+                                            },
+                                            "name_en": {
+                                                "type": "string"
+                                            },
                                             "value": {
                                                 "type": "string"
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "format": "double"
                                             }
                                         },
                                         "type": "object"
@@ -2651,7 +3844,10 @@
                                 "type": "object",
                                 "example": {
                                     "option_id": "option_id",
-                                    "value": "value"
+                                    "name_ar": "name_ar",
+                                    "name_en": "name_en",
+                                    "value": "value",
+                                    "price": "price"
                                 }
                             }
                         }
@@ -2668,9 +3864,22 @@
                                             "type": "integr",
                                             "example": "option_id"
                                         },
+                                        "name_ar": {
+                                            "type": "string",
+                                            "example": "name_ar"
+                                        },
+                                        "name_en": {
+                                            "type": "string",
+                                            "example": "name_en"
+                                        },
                                         "value": {
                                             "type": "string",
                                             "example": "value"
+                                        },
+                                        "price": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "example": "price"
                                         },
                                         "updated_at": {
                                             "type": "string",
@@ -2702,7 +3911,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/subOption/delete/{id}": {
@@ -2729,7 +3943,12 @@
                     "403": {
                         "description": "Access Denied"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/tenantProfile": {
@@ -2827,6 +4046,195 @@
                 }
             }
         },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get All Users",
+                "operationId": "971db9bc974c0e607288cfe7ecc10096",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user/update/{id}": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": " ",
+                "operationId": "a7d9dc19debe3941b761cf80a07967ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            },
+                                            "isAdmin": {
+                                                "type": "integer"
+                                            },
+                                            "sumPermessions": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "name",
+                                    "phone": "phone",
+                                    "password": "password",
+                                    "isAdmin": "isAdmin",
+                                    "sumPermessions": "sumPermessions"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "name"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "password"
+                                        },
+                                        "isAdmin": {
+                                            "type": "integer",
+                                            "example": "isAdmin"
+                                        },
+                                        "sumPermessions": {
+                                            "type": "integer",
+                                            "example": "sumPermessions"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/user/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete User",
+                "operationId": "aba688a94d6912a5140bb7b6b6d30667",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "User ID",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": ""
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/registerTenant": {
             "post": {
                 "tags": [
@@ -2842,6 +4250,9 @@
                                 "properties": {
                                     "": {
                                         "properties": {
+                                            "idRestaurant": {
+                                                "type": "string"
+                                            },
                                             "userNameTenant": {
                                                 "type": "string"
                                             },
@@ -2852,7 +4263,7 @@
                                                 "type": "string"
                                             },
                                             "isAdmin": {
-                                                "type": "boolean"
+                                                "type": "integer"
                                             },
                                             "sumPermessions": {
                                                 "type": "integer"
@@ -2863,6 +4274,7 @@
                                 },
                                 "type": "object",
                                 "example": {
+                                    "idRestaurant": "1",
                                     "userNameTenant": "userNameTenant",
                                     "userPassTenant": "userPassTenant",
                                     "phone": "phone",
@@ -2880,6 +4292,10 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
+                                        "idRestaurant": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
                                         "userNameTenant": {
                                             "type": "string",
                                             "example": "userNameTenant"
@@ -2893,7 +4309,7 @@
                                             "example": "phone"
                                         },
                                         "isAdmin": {
-                                            "type": "boolean",
+                                            "type": "integer",
                                             "example": "isAdmin"
                                         },
                                         "sumPermessions": {
@@ -3110,6 +4526,968 @@
                                 }
                             }
                         }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/userTenant": {
+            "get": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "summary": "Get All userTenant",
+                "operationId": "74224bcb45db986254ab625f1c35f028",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/userTenant/update/{id}": {
+            "post": {
+                "tags": [
+                    "UserTenant"
+                ],
+                "description": " ",
+                "operationId": "95f8391f2c495d87d3a68bb842a89537",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "idRestaurant": {
+                                                "type": "string"
+                                            },
+                                            "userNameTenant": {
+                                                "type": "string"
+                                            },
+                                            "userPassTenant": {
+                                                "type": "string"
+                                            },
+                                            "phone": {
+                                                "type": "string"
+                                            },
+                                            "isAdmin": {
+                                                "type": "integer"
+                                            },
+                                            "sumPermessions": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "idRestaurant": "1",
+                                    "userNameTenant": "userNameTenant",
+                                    "userPassTenant": "userPassTenant",
+                                    "phone": "phone",
+                                    "isAdmin": "isAdmin",
+                                    "sumPermessions": "sumPermessions"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "idRestaurant": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "userNameTenant": {
+                                            "type": "string",
+                                            "example": "userNameTenant"
+                                        },
+                                        "userPassTenant": {
+                                            "type": "string",
+                                            "example": "userPassTenant"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "phone"
+                                        },
+                                        "isAdmin": {
+                                            "type": "integer",
+                                            "example": "isAdmin"
+                                        },
+                                        "sumPermessions": {
+                                            "type": "integer",
+                                            "example": "sumPermessions"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/userTenant/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete userTenant",
+                "operationId": "a03b8685bd80bad95401fae92e0c1df3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "description": "User ID",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": ""
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/sendMessage": {
+            "post": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Send a message via WebSocket broadcast",
+                "description": "Sends a message and broadcasts it to other clients via WebSocket",
+                "operationId": "2cd7c5dd2db6d698d256f26ddd632fd2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "message"
+                                ],
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Hello, World!"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message sent",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Message sent!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/getBranch": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "cbea040b3fc85125f86ea1042da9963d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getMenu": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "5c7a537105d3cc20d79dda80d9f3e04e",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "visit": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain",
+                                    "branch_id": "branch_id",
+                                    "visit": "1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "visit": {
+                                            "type": "boolean",
+                                            "example": "1"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getCategory": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "70ebff65b791b47d03cf842881ee6438",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "menu_id": {
+                                                "type": "integer"
+                                            },
+                                            "visit": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain",
+                                    "branch_id": "branch_id",
+                                    "menu_id": "menu_id",
+                                    "visit": "1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "menu_id": {
+                                            "type": "integr",
+                                            "example": "menu_id"
+                                        },
+                                        "visit": {
+                                            "type": "boolean",
+                                            "example": "1"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getProduct": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "f444b33b79f15fb37100dcf0499c377d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "category_id": {
+                                                "type": "integer"
+                                            },
+                                            "visit": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain",
+                                    "branch_id": "branch_id",
+                                    "category_id": "category_id",
+                                    "visit": "1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "category_id": {
+                                            "type": "integr",
+                                            "example": "category_id"
+                                        },
+                                        "visit": {
+                                            "type": "boolean",
+                                            "example": "1"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getOption": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "3b4be09815bcdd5a1d1d766c87992d89",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "branch_id": {
+                                                "type": "integer"
+                                            },
+                                            "product_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain",
+                                    "branch_id": "branch_id",
+                                    "product_id": "product_id"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "product_id": {
+                                            "type": "integr",
+                                            "example": "product_id"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getStyle": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "8839f288b5b97f42a92f56afa5a9d1d2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getSocialMedia": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "a51f0e836090ffedff76a4ad67342b3c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "domain": {
+                                                "type": "string"
+                                            },
+                                            "branch_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "domain": "domain",
+                                    "branch_id": "branch_id"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "example": "domain"
+                                        },
+                                        "branch_id": {
+                                            "type": "integr",
+                                            "example": "branch_id"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-12-11T09:25:53.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "CredentialsError = 1;Required = 100;MaxLength255 = 101;Unique = 103;"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getProductById/{id}&{visit}": {
+            "post": {
+                "tags": [
+                    "Web"
+                ],
+                "description": "",
+                "operationId": "ab65569cbe5fa9a8a9257a3b4de362ed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "visit",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                }
+            }
+        },
+        "/api/getProductCommon/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Web"
+                ],
+                "summary": "Get  Product",
+                "operationId": "3ea021e971017fe7c5d113f70a193e9a",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/getProductNew/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Web"
+                ],
+                "summary": "Get  Product",
+                "operationId": "438a1116f4a9c932ce8d12fb5e1f7bf1",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/getProductPriceOffer/{branch_id}": {
+            "get": {
+                "tags": [
+                    "Web"
+                ],
+                "summary": "Get  Product",
+                "operationId": "5a5d391292a73aaf9c13a930b44c8f6c",
+                "parameters": [
+                    {
+                        "name": "branch_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything OK"
+                    },
+                    "403": {
+                        "description": "Access Denied"
                     }
                 },
                 "security": [

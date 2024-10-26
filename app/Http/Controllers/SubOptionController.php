@@ -18,6 +18,7 @@ class SubOptionController extends Controller
      *     path="/api/subOption",
      *     tags={"SubOption"},
      *     summary="Get all SubOption",
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Everything OK"
@@ -28,8 +29,12 @@ class SubOptionController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $subOption = SubOption::all();
         return response()->json($this->success($subOption));
     }
@@ -39,6 +44,7 @@ class SubOptionController extends Controller
      *     path="/api/subOption/store",
      *     tags={"SubOption"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -50,13 +56,28 @@ class SubOptionController extends Controller
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
+     *                          property="name_ar",
+     *                          type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name_en",
+     *                          type="string",
+     *                      ),
+     *                      @OA\Property(
      *                          property="value",
      *                          type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="price",
+     *                          type="double",
      *                      ),
      *                 ),
      *                 example={
      *                     "option_id":"option_id",
+     *                     "name_ar":"name_ar",
+     *                     "name_en":"name_en",
      *                     "value":"value",
+     *                     "price":"price",
      *                }
      *             )
      *         )
@@ -66,7 +87,10 @@ class SubOptionController extends Controller
      *          description="success",
      *          @OA\JsonContent(
      *              @OA\Property(property="option_id", type="integr", example="option_id"),
+     *              @OA\Property(property="name_ar", type="string", example="name_ar"),
+     *              @OA\Property(property="name_en", type="string", example="name_en"),
      *              @OA\Property(property="value", type="string", example="value"),
+     *              @OA\Property(property="price", type="double", example="price"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -82,6 +106,10 @@ class SubOptionController extends Controller
      */
     public function store(SubOptionRequest $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $subOption = SubOption::create($request->all());
         return response()->json($this->success($subOption));
     }
@@ -91,6 +119,7 @@ class SubOptionController extends Controller
      *     path="/api/subOption/show/{id}",
      *     tags={"SubOption"},
      *     summary="Get  SubOption",
+     *     security={{"sanctum":{}}},
      *      @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -107,8 +136,12 @@ class SubOptionController extends Controller
      *     )
      * )
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $subOption = SubOption::where('id', $id)->first();
         return response()->json($this->success($subOption));
     }
@@ -118,6 +151,7 @@ class SubOptionController extends Controller
      *     path="/api/subOption/update/{id}",
      *     tags={"SubOption"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -130,18 +164,33 @@ class SubOptionController extends Controller
      *             @OA\Schema(
      *                 @OA\Property(
      *                      type="object",
-     *                    @OA\Property(
+     *                      @OA\Property(
      *                          property="option_id",
      *                          type="integer",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name_ar",
+     *                          type="string",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name_en",
+     *                          type="string",
      *                      ),
      *                      @OA\Property(
      *                          property="value",
      *                          type="string",
      *                      ),
+     *                      @OA\Property(
+     *                          property="price",
+     *                          type="double",
+     *                      ),
      *                 ),
      *                 example={
      *                     "option_id":"option_id",
+     *                     "name_ar":"name_ar",
+     *                     "name_en":"name_en",
      *                     "value":"value",
+     *                     "price":"price",
      *                }
      *             )
      *         )
@@ -151,7 +200,10 @@ class SubOptionController extends Controller
      *          description="success",
      *          @OA\JsonContent(
      *              @OA\Property(property="option_id", type="integr", example="option_id"),
+     *              @OA\Property(property="name_ar", type="string", example="name_ar"),
+     *              @OA\Property(property="name_en", type="string", example="name_en"),
      *              @OA\Property(property="value", type="string", example="value"),
+     *              @OA\Property(property="price", type="double", example="price"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -167,6 +219,10 @@ class SubOptionController extends Controller
      */
     public function update(SubOptionRequest $request, $id)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $subOption = SubOption::where('id', $id)->first();
         $input = $request->all();
         $subOption->update($input);
@@ -177,6 +233,7 @@ class SubOptionController extends Controller
      *     path="/api/subOption/delete/{id}",
      *     tags={"SubOption"},
      *     summary="delete  SubOption",
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -193,8 +250,12 @@ class SubOptionController extends Controller
      *     )
      * )
      */
-    public function delete($id)
+    public function delete($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $subOption = SubOption::where('id', $id)->first();
         $subOption->delete();
         return response()->json($this->success());

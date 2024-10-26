@@ -14,5 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'http://127.0.0.1:8000/api*',
+        'https://restaurantapi.twhuae.com/api*',
+        'https://restaurantapi.twhmenu.com/api*',
+        'https://testapi.twhtest.com/api*'
     ];
 }

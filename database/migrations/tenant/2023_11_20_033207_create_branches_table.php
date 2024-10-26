@@ -17,11 +17,18 @@ return new class extends Migration
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->constrained()->cascadeOnDelete();
             $table->string('name_ar');
             $table->string('name_en');
-            $table->string('address_ar');
-            $table->string('address_en');
-            $table->string('phone');
-            $table->string('mobile');
-            $table->string("QR");
+            $table->string('description_ar')->nullable();
+            $table->string('description_en')->nullable();
+            $table->string('address_ar')->nullable();
+            $table->string('address_en')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string("QR")->nullable();
+            $table->string("image_offer")->nullable();
+            $table->string("image_common")->nullable();
+            $table->string("image_new")->nullable();
+            $table->integer('num');
+            $table->integer('num_visit')->default(0);
             $table->timestamps();
         });
     }

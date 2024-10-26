@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('menu_id')->references('id')->on('menus')->constrained()->cascadeOnDelete();
             $table->string("name_en");
             $table->string("name_ar");
+            $table->string('image');
+            $table->integer('num_visit')->default(0);
             $table->timestamps();
         });
     }

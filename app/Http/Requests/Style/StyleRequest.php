@@ -30,16 +30,17 @@ class StyleRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required',
-            'primary_font_color' => 'nullable',
-            'secondary_font_color' => 'nullable',
-            'background_color' => 'nullable',
-            'shadow_color' => 'nullable',
-            'primary_category_color' => 'nullable',
-            'secondary_category_color' => 'nullable',
-            'price_color' => 'nullable',
-            'price_offer_color' => 'nullable',
+            'primary' => 'nullable',
+            'onPrimary' => 'nullable',
+            'secondary' => 'nullable',
+            'onSecondary' => 'nullable',
+            'enable' => 'nullable',
+            'disable' => 'nullable',
+            'background' => 'nullable',
+            'onBackground' => 'nullable',
         ];
     }
+
 
     public function messages()
     {

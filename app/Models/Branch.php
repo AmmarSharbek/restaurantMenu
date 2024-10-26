@@ -16,13 +16,25 @@ class Branch extends Model
         'restaurant_id',
         'name_ar',
         'name_en',
+        'description_ar',
+        'description_en',
         'address_ar',
         'address_en',
         'phone',
         'mobile',
         'QR',
+        'image_offer',
+        'image_common',
+        'image_new',
+        'num',
+        'num_visit',
     ];
 
+protected $casts = [
+        'restaurant_id' => 'integer',
+        'num' => 'integer',
+        'num_visit' => 'integer',
+    ];
     /**
      * Get the user that owns the Branch
      *

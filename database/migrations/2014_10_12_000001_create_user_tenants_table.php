@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('user_tenants', function (Blueprint $table) {
             $table->id();
-            $table->string('idTenant');
+            $table->string('idRestaurant');
             $table->string('userNameTenant');
             $table->string('userPassTenant');
             $table->string('phone')->unique();
-            $table->boolean('isAdmin')->default(0);
+            $table->integer('isAdmin')->default(0);
             $table->bigInteger('sumPermessions')->default(0);
             $table->timestamps();
             $table->rememberToken();

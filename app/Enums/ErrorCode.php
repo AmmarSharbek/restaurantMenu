@@ -17,6 +17,7 @@ final class ErrorCode extends Enum
     const CredentialsError = 1;
     const WorngPassword = 2;
     const PermissionsError = 3;
+    const NotFound = 4;
     const TokenInvalidException =   20;
     const TokenExpiredException =   21;
 }

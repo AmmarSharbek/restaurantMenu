@@ -16,8 +16,13 @@ class Menu extends Model
         'branch_id',
         'name_en',
         'name_ar',
+        'image',
+        'num_visit',
     ];
 
+protected $casts = [
+        'branch_id' => 'integer',
+    ];
     /**
      * Get the branch that owns the Menu
      *

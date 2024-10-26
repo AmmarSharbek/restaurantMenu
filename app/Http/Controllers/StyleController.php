@@ -2,22 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ErrorCode;
 use App\Http\Requests\Style\StyleRequest;
+use App\Models\Restaurant;
 use App\Models\Style;
 use App\Traits\ResponseHandler;
 use Illuminate\Http\Request;
+use App\Models\StatisticsVisit;
 
 class StyleController extends Controller
 {
     use ResponseHandler;
-    /**
-     * Display a listing of the resource.
-     */
+    // /**
+    //  * @OA\Get(
+    //  *     path="/api/getStyle",
+    //  *     summary="Get Style by Domain",
+    //  *     tags={"Style"},
+    //  *     security={{"bearerAuth":{}}},
+    //  *     @OA\Parameter(
+    //  *         name="domain",
+    //  *         in="query",
+    //  *         required=true,
+    //  *         description="Domain of the restaurant",
+    //  *         example="example.com",
+    //  *         @OA\Schema(type="string")
+    //  *     ),
+    //  *     @OA\Response(
+    //  *         response=200,
+    //  *         description="Successful operation",
+    //  *         @OA\JsonContent(
+    //  *             type="object",
+    //  *             @OA\Property(property="data", ref=""),
+    //  *             @OA\Property(property="message", type="string", example="Style retrieved successfully"),
+    //  *         ),
+    //  *     ),
+    //  *     @OA\Response(
+    //  *         response=404,
+    //  *         description="Style not found",
+    //  *         @OA\JsonContent(
+    //  *             type="object",
+    //  *             @OA\Property(property="message", type="string", example="Style not found for the provided domain"),
+    //  *         ),
+    //  *     ),
+    //  * )
+    //  */
+    // public function getStyle(Request $request)
+    // {
+    //     $input = $request->all();
+    //     $restaurant = Restaurant::where('domin', $input['domain'])->first();
+
+    //     if (!$restaurant) {
+    //         return response()->json($this->error(new ErrorCode(ErrorCode::NotFound)), 404);
+    //     }
+
+    //     $style = Style::where('restaurant_id', $restaurant->id)->first();
+
+    //     if (!$style) {
+    //         return response()->json($this->error(new ErrorCode(ErrorCode::NotFound)), 404);
+    //     }
+
+    //     return response()->json($this->success($style));
+    // }
     /**
      * @OA\Get(
      *     path="/api/style",
      *     tags={"Style"},
      *     summary="Get all Branch",
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Everything OK"
@@ -28,9 +79,40 @@ class StyleController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
+        $statv = StatisticsVisit::all();
+       
         $style = Style::all();
+        return response()->json($this->success($style));
+    }
+    /**
+     * @OA\Get(
+     *     path="/api/style/getStyle",
+     *     tags={"Style"},
+     *     summary="Get  Style",
+     *     security={{"sanctum":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Everything OK"
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Access Denied"
+     *     )
+     * )
+     */
+    public function getStyle(Request $request)
+    {
+        $tenantFunction = new  TenancyFunction;
+        $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
+        $style = Style::where('restaurant_id', $init['idRestaurant'])->get();
         return response()->json($this->success($style));
     }
 
@@ -39,6 +121,7 @@ class StyleController extends Controller
      *     path="/api/style/store",
      *     tags={"Style"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -50,48 +133,48 @@ class StyleController extends Controller
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
-     *                          property="primary_font_color",
+     *                          property="primary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="secondary_font_color",
+     *                          property="onPrimary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="background_color",
+     *                          property="secondary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="shadow_color",
+     *                          property="onSecondary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="primary_category_color",
+     *                          property="enable",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="secondary_category_color",
+     *                          property="disable",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="price_color",
+     *                          property="background",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="price_offer_color",
+     *                          property="onBackground",
      *                          type="string",
      *                      ),
      *                 ),
      *                 example={
      *                     "restaurant_id":"restaurant_id",
-     *                     "primary_font_color":"primary_font_color",
-     *                     "secondary_font_color":"secondary_font_color",
-     *                     "background_color":"background_color",
-     *                     "shadow_color":"shadow_color",
-     *                     "primary_category_color":"primary_category_color",
-     *                     "secondary_category_color":"secondary_category_color",
-     *                     "price_color":"price_color",
-     *                     "price_offer_color":"price_offer_color",
+     *                     "primary":"primary",
+     *                     "onPrimary":"onPrimary",
+     *                     "secondary":"secondary",
+     *                     "onSecondary":"onSecondary",
+     *                     "enable":"enable",
+     *                     "disable":"disable",
+     *                     "background":"background",
+     *                     "onBackground":"onBackground",
      *                }
      *             )
      *         )
@@ -101,14 +184,14 @@ class StyleController extends Controller
      *          description="success",
      *          @OA\JsonContent(
      *              @OA\Property(property="restaurant_id", type="integr", example="restaurant_id"),
-     *              @OA\Property(property="primary_font_color", type="string", example="primary_font_color"),
-     *              @OA\Property(property="secondary_font_color", type="string", example="secondary_font_color"),
-     *              @OA\Property(property="background_color", type="string", example="background_color"),
-     *              @OA\Property(property="shadow_color", type="string", example="shadow_color"),
-     *              @OA\Property(property="primary_category_color", type="string", example="primary_category_color"),
-     *              @OA\Property(property="secondary_category_color", type="string", example="secondary_category_color"),
-     *              @OA\Property(property="price_color", type="string", example="price_color"),
-     *              @OA\Property(property="price_offer_color", type="string", example="price_offer_color"),
+     *              @OA\Property(property="primary", type="string", example="primary"),
+     *              @OA\Property(property="onPrimary", type="string", example="onPrimary"),
+     *              @OA\Property(property="secondary", type="string", example="secondary"),
+     *              @OA\Property(property="onSecondary", type="string", example="onSecondary"),
+     *              @OA\Property(property="enable", type="string", example="enable"),
+     *              @OA\Property(property="disable", type="string", example="disable"),
+     *              @OA\Property(property="background", type="string", example="background"),
+     *              @OA\Property(property="onBackground", type="string", example="onBackground"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -124,6 +207,10 @@ class StyleController extends Controller
      */
     public function store(StyleRequest $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $style = Style::create($request->all());
         return response()->json($this->success($style));
     }
@@ -133,6 +220,7 @@ class StyleController extends Controller
      *     path="/api/style/show/{id}",
      *     tags={"Style"},
      *     summary="Get  Style",
+     *     security={{"sanctum":{}}},
      *      @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -149,8 +237,12 @@ class StyleController extends Controller
      *     )
      * )
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $style = Style::where('id', $id)->first();
         return response()->json($this->success($style));
     }
@@ -160,6 +252,7 @@ class StyleController extends Controller
      *     path="/api/style/update/{id}",
      *     tags={"Style"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -177,48 +270,48 @@ class StyleController extends Controller
      *                          type="integer",
      *                      ),
      *                      @OA\Property(
-     *                          property="primary_font_color",
+     *                          property="primary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="secondary_font_color",
+     *                          property="onPrimary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="background_color",
+     *                          property="secondary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="shadow_color",
+     *                          property="onSecondary",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="primary_category_color",
+     *                          property="enable",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="secondary_category_color",
+     *                          property="disable",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="price_color",
+     *                          property="background",
      *                          type="string",
      *                      ),
      *                      @OA\Property(
-     *                          property="price_offer_color",
+     *                          property="onBackground",
      *                          type="string",
      *                      ),
      *                 ),
      *                 example={
      *                     "restaurant_id":"restaurant_id",
-     *                     "primary_font_color":"primary_font_color",
-     *                     "secondary_font_color":"secondary_font_color",
-     *                     "background_color":"background_color",
-     *                     "shadow_color":"shadow_color",
-     *                     "primary_category_color":"primary_category_color",
-     *                     "secondary_category_color":"secondary_category_color",
-     *                     "price_color":"price_color",
-     *                     "price_offer_color":"price_offer_color",
+     *                     "primary":"primary",
+     *                     "onPrimary":"onPrimary",
+     *                     "secondary":"secondary",
+     *                     "onSecondary":"onSecondary",
+     *                     "enable":"enable",
+     *                     "disable":"disable",
+     *                     "background":"background",
+     *                     "onBackground":"onBackground",
      *                }
      *             )
      *         )
@@ -228,14 +321,14 @@ class StyleController extends Controller
      *          description="success",
      *          @OA\JsonContent(
      *              @OA\Property(property="restaurant_id", type="integr", example="restaurant_id"),
-     *              @OA\Property(property="primary_font_color", type="string", example="primary_font_color"),
-     *              @OA\Property(property="secondary_font_color", type="string", example="secondary_font_color"),
-     *              @OA\Property(property="background_color", type="string", example="background_color"),
-     *              @OA\Property(property="shadow_color", type="string", example="shadow_color"),
-     *              @OA\Property(property="primary_category_color", type="string", example="primary_category_color"),
-     *              @OA\Property(property="secondary_category_color", type="string", example="secondary_category_color"),
-     *              @OA\Property(property="price_color", type="string", example="price_color"),
-     *              @OA\Property(property="price_offer_color", type="string", example="price_offer_color"),
+     *              @OA\Property(property="primary", type="string", example="primary"),
+     *              @OA\Property(property="onPrimary", type="string", example="onPrimary"),
+     *              @OA\Property(property="secondary", type="string", example="secondary"),
+     *              @OA\Property(property="onSecondary", type="string", example="onSecondary"),
+     *              @OA\Property(property="enable", type="string", example="enable"),
+     *              @OA\Property(property="disable", type="string", example="disable"),
+     *              @OA\Property(property="background", type="string", example="background"),
+     *              @OA\Property(property="onBackground", type="string", example="onBackground"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -251,6 +344,10 @@ class StyleController extends Controller
      */
     public function update(StyleRequest $request, $id)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $style = Style::where('id', $id)->first();
         $input = $request->all();
         $style->update($input);
@@ -261,6 +358,7 @@ class StyleController extends Controller
      *     path="/api/style/delete/{id}",
      *     tags={"Style"},
      *     summary="delete  Style",
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -277,8 +375,12 @@ class StyleController extends Controller
      *     )
      * )
      */
-    public function delete($id)
+    public function delete($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $style = Style::where('id', $id)->first();
         $style->delete();
         return response()->json($this->success());

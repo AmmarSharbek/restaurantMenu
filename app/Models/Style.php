@@ -12,16 +12,19 @@ class Style extends Model
     protected $fillable = [
         'id',
         'restaurant_id',
-        'primary_font_color',
-        'secondary_font_color',
-        'background_color',
-        'shadow_color',
-        'primary_category_color',
-        'secondary_category_color',
-        'price_color',
-        'price_offer_color',
+        'primary',
+        'onPrimary',
+        'secondary',
+        'onSecondary',
+        'enable',
+        'disable',
+        'background',
+        'onBackground',
     ];
-
+    
+    protected $casts = [
+        'restaurant_id' => 'integer',
+    ];
     /**
      * Get the user that owns the Branch
      *

@@ -20,25 +20,26 @@ class UserTenant extends Authenticatable
         "phone",
         "isAdmin",
         "sumPermessions",
-        "idTenant"
+        "idRestaurant"
     ];
 
+protected $casts = [
+        'isAdmin' => 'boolean',
+        'sumPermessions' => 'integer',
+        'idRestaurant' => 'integer',
+    ];
     protected $hidden = [
-        'userPassTenant',
         'remember_token',
     ];
 
-    protected $casts = [
-        'userPassTenant' => 'hashed',
-    ];
 
     /**
      * Get the tenant that owns the UserTenant
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tenant(): BelongsTo
+    public function restaurant(): BelongsTo
     {
-        return $this->belongsTo(Tenant::class, 'id', 'idTenant');
+        return $this->belongsTo(Restaurant::class, 'id', 'idRestaurant');
     }
 }

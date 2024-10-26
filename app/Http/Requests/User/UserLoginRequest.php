@@ -29,15 +29,15 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
+            'phone' => 'required|max:255',
             'password' => 'required|max:255'
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'name.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'phone.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'phone.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'password.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'password.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
         ];

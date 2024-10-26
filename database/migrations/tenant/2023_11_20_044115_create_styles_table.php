@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->constrained()->cascadeOnDelete();
-            $table->string("primary_font_color")->nullable();
-            $table->string("secondary_font_color")->nullable();
-            $table->string("background_color")->nullable();
-            $table->string("shadow_color")->nullable();
-            $table->string("primary_category_color")->nullable();
-            $table->string("secondary_category_color")->nullable();
-            $table->string("price_color")->nullable();
-            $table->string("price_offer_color")->nullable();
+            $table->string("primary")->nullable();
+            $table->string("onPrimary")->nullable();
+            $table->string("secondary")->nullable();
+            $table->string("onSecondary")->nullable();
+            $table->string("enable")->nullable();
+            $table->string("disable")->nullable();
+            $table->string("background")->nullable();
+            $table->string("onBackground")->nullable();
             $table->timestamps();
         });
     }

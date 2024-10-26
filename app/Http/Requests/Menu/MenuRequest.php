@@ -29,7 +29,6 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => 'required',
             'name_ar' => 'required|max:255',
             'name_en' => 'required|max:255',
         ];
@@ -38,7 +37,6 @@ class MenuRequest extends FormRequest
     public function messages()
     {
         return [
-            'branch_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'name_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),

@@ -18,6 +18,9 @@ class Option extends Model
         'name_ar',
     ];
 
+protected $casts = [
+        'product_id' => 'integer',
+    ];
     /**
      * Get the product that owns the Option
      *

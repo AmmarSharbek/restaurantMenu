@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('option_id')->constrained()->cascadeOnDelete();
             $table->foreign('option_id')->references('id')->on('options')->constrained()->cascadeOnDelete();
-            $table->string("value");
+            $table->string("name_en");
+            $table->string("name_ar");
+            $table->char("value")->nullable();
+            $table->double("price")->default(0.0);
             $table->timestamps();
         });
     }

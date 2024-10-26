@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Menu\MenuRequest;
+use App\Models\Branch;
 use App\Models\Menu;
+use App\Models\Restaurant;
 use App\Traits\ResponseHandler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -18,6 +21,7 @@ class MenuController extends Controller
      *     path="/api/menu",
      *     tags={"Menu"},
      *     summary="Get all Menu",
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Everything OK"
@@ -28,9 +32,43 @@ class MenuController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $menu = Menu::all();
+        return response()->json($this->success($menu));
+    }
+    /**
+     * @OA\Get(
+     *     path="/api/menu/getMenu/{branch_id}",
+     *     tags={"Menu"},
+     *     summary="Get  Menu",
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="branch_id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Everything OK"
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Access Denied"
+     *     )
+     * )
+     */
+    public function getMenu(Request $request, $branch_id)
+    {
+
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+        // // tenancy()->initialize($init['tenant']);
+        // // return $restaurant;
+        // $branch = Branch::where('restaurant_id', $init['idRestaurant'])->where('num', 1)->first();
+        $menu = Menu::where('branch_id', $branch_id)->get();
         return response()->json($this->success($menu));
     }
 
@@ -39,6 +77,7 @@ class MenuController extends Controller
      *     path="/api/menu/store",
      *     tags={"Menu"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -57,11 +96,16 @@ class MenuController extends Controller
      *                          property="name_en",
      *                          type="string",
      *                      ),
+     *                      @OA\Property(
+     *                          property="image",
+     *                          type="string",
+     *                      ),
      *                 ),
      *                 example={
      *                     "branch_id":"branch_id",
      *                     "name_ar":"name_ar",
      *                     "name_en":"name_en",
+     *                     "image":"image",
      *                }
      *             )
      *         )
@@ -73,6 +117,7 @@ class MenuController extends Controller
      *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
      *              @OA\Property(property="name_ar", type="string", example="name_ar"),
      *              @OA\Property(property="name_en", type="string", example="name_en"),
+     *              @OA\Property(property="image", type="string", example="image"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -88,7 +133,30 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        $menu = Menu::create($request->all());
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+        // // tenancy()->initialize($init['tenant']);
+        // $restaurant = Restaurant::where('domin', $init['id_Tenant'])->first();
+        // // return $restaurant;
+        // $branch = Branch::where('restaurant_id', $restaurant['id'])->where('num', 1)->first();
+        $input = $request->all();
+        // $input['branch_id'] = $branch->id;
+        $image_path = "";
+        if ($request->has('image')) {
+            $image_path = $request->file('image')->store('image', 'public_uploads');
+        } else {
+            $branch = Branch::where('id', $input['branch_id'])->first();
+            $restaurant = Restaurant::where('id', $branch->restaurant_id)->first();
+            if ($restaurant->default_image != null) {
+                $image_path = $restaurant->default_image;
+            }
+        }
+        $input['image'] = $image_path;
+        $menu = Menu::create($input);
         return response()->json($this->success($menu));
     }
 
@@ -97,6 +165,7 @@ class MenuController extends Controller
      *     path="/api/menu/show/{id}",
      *     tags={"Menu"},
      *     summary="Get  Menu",
+     *     security={{"sanctum":{}}},
      *      @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -113,8 +182,12 @@ class MenuController extends Controller
      *     )
      * )
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $menu = Menu::where('id', $id)->first();
         return response()->json($this->success($menu));
     }
@@ -124,6 +197,7 @@ class MenuController extends Controller
      *     path="/api/menu/update/{id}",
      *     tags={"Menu"},
      *     description="" ,
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -148,11 +222,16 @@ class MenuController extends Controller
      *                          property="name_en",
      *                          type="string",
      *                      ),
+     *                      @OA\Property(
+     *                          property="image",
+     *                          type="string",
+     *                      ),
      *                 ),
      *                 example={
      *                     "branch_id":"branch_id",
      *                     "name_ar":"name_ar",
      *                     "name_en":"name_en",
+     *                     "image":"image",
      *                }
      *             )
      *         )
@@ -164,6 +243,7 @@ class MenuController extends Controller
      *              @OA\Property(property="branch_id", type="integr", example="branch_id"),
      *              @OA\Property(property="name_ar", type="string", example="name_ar"),
      *              @OA\Property(property="name_en", type="string", example="name_en"),
+     *              @OA\Property(property="image", type="string", example="image"),
      *              @OA\Property(property="updated_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *              @OA\Property(property="created_at", type="string", example="2021-12-11T09:25:53.000000Z"),
      *          )
@@ -177,10 +257,23 @@ class MenuController extends Controller
      *      )
      * )
      */
-    public function update(MenuRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $menu = Menu::where('id', $id)->first();
         $input = $request->all();
+        if ($request->has('deleteImage') && $input['deleteImage'] == 1) {
+            Storage::disk('public_uploads')->delete($menu->image);
+            $input['image'] = "";
+        }
+        if ($request->has('image')) {
+            Storage::disk('public_uploads')->delete($menu->image);
+            $image_path = $request->file('image')->store('image', 'public_uploads');
+            $input['image'] = $image_path;
+        }
         $menu->update($input);
         return response()->json($this->success($menu));
     }
@@ -189,6 +282,7 @@ class MenuController extends Controller
      *     path="/api/menu/delete/{id}",
      *     tags={"Menu"},
      *     summary="delete  Menu",
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -205,9 +299,14 @@ class MenuController extends Controller
      *     )
      * )
      */
-    public function delete($id)
+    public function delete($id, Request $request)
     {
+        // $tenantFunction = new  TenancyFunction;
+        // $init = $tenantFunction->initializeTenant($request);
+
+        // tenancy()->initialize($init['tenant']);
         $menu = Menu::where('id', $id)->first();
+        Storage::disk('public_uploads')->delete($menu->image);
         $menu->delete();
         return response()->json($this->success());
     }

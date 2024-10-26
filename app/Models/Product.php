@@ -25,8 +25,20 @@ class Product extends Model
         'new',
         'hidden',
         'unavailable',
+        'sortNum',
+        'num_visit'
     ];
 
+protected $casts = [
+        'category_id' => 'integer',
+        'price' => 'double',
+        'price_offer' => 'double',
+        'common' => 'boolean',
+        'new' => 'boolean',
+        'hidden' => 'boolean',
+        'unavailable' => 'boolean',
+        'num_visit' => 'integer',
+    ];
     /**
      * Get the category that owns the Product
      *

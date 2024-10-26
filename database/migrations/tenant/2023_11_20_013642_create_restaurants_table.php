@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('description_ar');
             $table->string('description_en');
             $table->string('logo');
+            $table->string('default_image')->nullable();
             $table->string('currency');
+            $table->string('domin');
+            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }

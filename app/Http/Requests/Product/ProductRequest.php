@@ -35,8 +35,8 @@ class ProductRequest extends FormRequest
             'name_en' => 'required|max:255',
             'description_ar' => 'required|max:255',
             'description_en' => 'required|max:255',
-            'price' => 'required|double',
-            'price_offer' => 'required|double',
+            'price' => 'required',
+            'price_offer',
             'image',
             'common',
             'new',
@@ -58,9 +58,6 @@ class ProductRequest extends FormRequest
             'description_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'description_en.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'price.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'price.double' => new ValidationErrorCode(ValidationErrorCode::_Double),
-            'price_offer.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'price_offer.double' => new ValidationErrorCode(ValidationErrorCode::_Double),
         ];
     }
     protected function failedValidation(Validator $validator)

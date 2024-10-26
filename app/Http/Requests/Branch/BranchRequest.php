@@ -32,11 +32,14 @@ class BranchRequest extends FormRequest
             'restaurant_id' => 'required',
             'name_ar' => 'required|max:255',
             'name_en' => 'required|max:255',
-            'address_ar' => 'required',
-            'address_en' => 'required',
-            'phone' => 'required',
-            'mobile' => 'required',
-            'QR' => 'required',
+            'description_ar',
+            'description_en',
+            'address_ar',
+            'address_en',
+            'phone',
+            'mobile',
+            'QR',
+            'num'
         ];
     }
 
@@ -48,11 +51,6 @@ class BranchRequest extends FormRequest
             'name_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'name_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'name_en.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
-            'address_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'address_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'mobile.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'phone.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'QR.required' => new ValidationErrorCode(ValidationErrorCode::Required),
         ];
     }
     protected function failedValidation(Validator $validator)

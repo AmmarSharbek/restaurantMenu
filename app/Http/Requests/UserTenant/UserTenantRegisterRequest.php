@@ -29,6 +29,7 @@ class UserTenantRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'idRestaurant' => 'required',
             'userNameTenant' => 'required|max:255',
             'phone' => 'required|max:255|unique:user_tenants,phone',
             'userPassTenant' => 'required|max:255',
@@ -40,6 +41,7 @@ class UserTenantRegisterRequest extends FormRequest
     public function messages()
     {
         return [
+            'idRestaurant.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'userNameTenant.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'userNameTenant.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
             'phone.required' => new ValidationErrorCode(ValidationErrorCode::Required),

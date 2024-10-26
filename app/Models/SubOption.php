@@ -12,9 +12,16 @@ class SubOption extends Model
     protected $fillable = [
         'id',
         'option_id',
+        'name_en',
+        'name_ar',
         'value',
+        'price',
     ];
 
+protected $casts = [
+        'option_id' => 'integer',
+        'price' => 'double',
+    ];
     /**
      * Get the user that owns the SubOption
      *

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->boolean("new")->default(0);
             $table->boolean("hidden")->default(0);
             $table->boolean("unavailable")->default(0);
+            $table->integer('sortNum')->default(0);
+            $table->integer("num_visit")->default(0);
             $table->timestamps();
         });
     }

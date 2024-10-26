@@ -15,9 +15,14 @@ class Category extends Model
         'id',
         'menu_id',
         'name_en',
-        'name_ar'
+        'name_ar',
+        'image',
+        'num_visit',
     ];
 
+protected $casts = [
+        'menu_id' => 'integer',
+    ];
     /**
      * Get the menu that owns the Category
      *

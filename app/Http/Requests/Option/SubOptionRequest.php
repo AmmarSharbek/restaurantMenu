@@ -30,7 +30,10 @@ class SubOptionRequest extends FormRequest
     {
         return [
             'option_id' => 'required',
-            'value' => 'required|max:255',
+            'name_ar' => 'required|max:255',
+            'name_en' => 'required|max:255',
+            'value',
+            'price'
         ];
     }
 
@@ -38,8 +41,10 @@ class SubOptionRequest extends FormRequest
     {
         return [
             'option_id.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'value.required' => new ValidationErrorCode(ValidationErrorCode::Required),
-            'value.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'name_ar.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'name_ar.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'name_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'name_en.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
         ];
     }
     protected function failedValidation(Validator $validator)

@@ -15,7 +15,8 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => env('BROADCAST_DRIVER', 'pusher'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -31,22 +32,26 @@ return [
     'connections' => [
 
         'pusher' => [
-            'driver' => 'pusher',
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
-            'options' => [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
-                'port' => env('PUSHER_PORT', 443),
-                'scheme' => env('PUSHER_SCHEME', 'https'),
-                'encrypted' => true,
-                'useTLS' => env('PUSHER_SCHEME', 'https') === 'https',
-            ],
-            'client_options' => [
-                // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
-            ],
-        ],
+              'driver' => 'pusher',
+              'key' => env('PUSHER_APP_KEY'),
+              'secret' => env('PUSHER_APP_SECRET'),
+              'app_id' => env('PUSHER_APP_ID'),
+              'options' => [
+                  'cluster' => env('PUSHER_APP_CLUSTER'),
+                  'useTLS' => true,   // Set this based on whether you're using HTTPS or not
+                  'encrypted' => true,  // This ensures you use encrypted (TLS/SSL) connections
+                  'host' => env('PUSHER_HOST'),  // You can set this to your WebSocket server domain or IP
+                  'port' => env('PUSHER_PORT'),  // Set this to the correct WebSocket port, e.g., 443 if you're using it
+                  'scheme' => env('PUSHER_SCHEME'),  // Set to 'https' for secure WebSocket (WSS)
+                  'curl_options' => [
+                      CURLOPT_SSL_VERIFYHOST => 0,  // Optional: Set to 0 if having SSL verification issues
+                      CURLOPT_SSL_VERIFYPEER => 0,  // Optional: Set to 0 if having SSL verification issues
+                  ],
+              ],
+          ],
+
+
+
 
         'ably' => [
             'driver' => 'ably',

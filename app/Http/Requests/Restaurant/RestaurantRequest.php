@@ -34,6 +34,8 @@ class RestaurantRequest extends FormRequest
             'description_ar' => 'required',
             'description_en' => 'required',
             'currency' => 'required|max:255',
+            'domin' => 'required|max:255|regex:/^[a-zA-Z]+$/|unique:restaurants,domin',
+            'isActive' => 'required',
         ];
     }
 
@@ -48,6 +50,11 @@ class RestaurantRequest extends FormRequest
             'description_en.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'currency.required' => new ValidationErrorCode(ValidationErrorCode::Required),
             'currency.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'domin.required' => new ValidationErrorCode(ValidationErrorCode::Required),
+            'domin.max' => new ValidationErrorCode(ValidationErrorCode::MaxLength255),
+            'domin.unique' => new ValidationErrorCode(ValidationErrorCode::Unique),
+            'domin.regex' => new ValidationErrorCode(ValidationErrorCode::Regex),
+            'isActive.required' => new ValidationErrorCode(ValidationErrorCode::Required),
         ];
     }
     protected function failedValidation(Validator $validator)
